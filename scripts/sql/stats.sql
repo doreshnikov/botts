@@ -4,6 +4,7 @@ from (select task_id, count(distinct student_id) as cnt
                join submission on run.submission_id = submission.id_
                join student on submission.student_id = student.id_
       where run.verdict = 'OK'
+        and event = 'contest-02'
       group by run.task_id) as ok
          join
      (select stats_all.task_id, count(distinct stats_all.student_id) as cnt

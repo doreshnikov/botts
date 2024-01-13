@@ -13,6 +13,7 @@ logging.basicConfig(level=logging.INFO)
 
 @dataclass
 class Request:
+    executor: str | None
     source: str
     args: tuple
     time_limit: int = field(default=1)
@@ -98,10 +99,14 @@ class Invoker:
             self.logger.warning(f'Request is malformed: invalid input data')
             response['error'] = f'expected request[\'args\'] to be a tuple, got {request["args"]}'
             return
+
+        source = request['source']
         try:
-            ast.parse(request['source'])
+            if 'executor' in request and request['executor'] is not None:
+                source = request['source'] + '\n' + request['executor']
+            ast.parse(source)
         except SyntaxError as e:
-            self.logger.warning(f'Request is malformed: source is not a valid code but {request["source"]}')
+            self.logger.warning(f'Request is malformed: source is not a valid code but {source}')
             response['error'] = f'expected a valid code, but have {e}'
             return
         return Request(**request)
@@ -120,7 +125,28 @@ class Invoker:
             self.logger.info(f'Received request {input_data}')
             request = self.validate(input_data, response)
             if request:
-                fn = ast.parse(request.source)
+                source = request.source
+                if request.executor is not None:
+                    ex = ast.parse(request.executor)
+                    ex_name = None
+                    for node in ast.walk(ex):
+                        if isinstance(node, ast.FunctionDef):
+                            ex_name = node.name
+                            break
+
+                    src = ast.parse(source)
+                    fn_name = None
+                    for node in ast.walk(src):
+                        if isinstance(node, ast.FunctionDef):
+                            fn_name = node.name
+                            break
+
+                    source = '\n'.join([
+                        source,
+                        request.executor,
+                        f'{fn_name} = {ex_name}({fn_name})'
+                    ])
+                fn = ast.parse(source)
                 self.run(fn, request.args, request.time_limit, response)
                 self.logger.info(f'Run successful, response is {response}')
 
