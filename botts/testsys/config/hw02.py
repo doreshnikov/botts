@@ -171,9 +171,9 @@ def polynomial_from_string(s: str):
     items += s.split()
 
     p = [0 for _ in range(len(items) // 2)]
-    for i in range(len(items) // 2):
-        sign = 1 if items[2 * i] == '+' else -1
-        value = items[2 * i + 1].split('^')
+    for sign, monomial in zip(items[::2], items[1::2]):
+        sign = 1 if sign == '+' else -1
+        value = monomial.split('^')
         d = int(value[1]) if len(value) > 1 else (1 if 'x' in value[0] else 0)
         coeff = value[0][:value[0].find('x')]
         if coeff == '':
@@ -241,7 +241,7 @@ R_POINT = R_FLOAT(-100.0, 100.0).repeat(2)
 
 HW02 = Event(
     'Homework 02',
-    datetime(year=2023, month=11, day=5, minute=0, second=0),
+    datetime(year=2023, month=11, day=5, hour=0, minute=0, second=0),
     [
         Task(
             id_='1-1-triangle-area',

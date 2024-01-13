@@ -17,17 +17,14 @@ class Locator(ABC):
         pass
 
 
+@dataclass(eq=True, frozen=True)
 class FnLocator(Locator):
-    def __init__(self, name: str):
-        self.name = name
+    name: str
 
     def matches(self, node: ast.AST) -> bool:
         if not isinstance(node, ast.FunctionDef):
             return False
         return node.name == self.name
-
-    def __hash__(self):
-        return hash(f'<function:{self.name}>')
 
 
 class NotebookContainer:

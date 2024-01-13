@@ -1,5 +1,6 @@
 import ast
 import copy
+import inspect
 from random import Random
 from typing import Awaitable, Callable
 
@@ -32,7 +33,7 @@ class Runner:
     def solution_hash(source: ast.AST):
         return hash(ast.dump(source))
 
-    def _do_run(self, source: str) -> Result:
+    def _do_run(self, source: str, **kwargs) -> Result:
         random = Random()
         submission_source = '\n'.join(
             [include.source for include in self.task.include] +
@@ -42,9 +43,12 @@ class Runner:
         for i, test in enumerate(tests):
             answer = None
             if self.task.solution is not None:
-                answer = safe_run(self.task.solution, test)
+                solution = self.task.solution
+                if self.task.executor is not None:
+                    solution = self.task.executor(solution)
+                answer = safe_run(solution, test)
                 if isinstance(answer, Exception):
-                    return Result(Verdict.CF, f'[test {i + 1}] error while running correct solution')
+                    return Result(Verdict.CF, f'[test {i + 1}] error while running correct solution: {answer}')
 
             invoker_id, invoker_port = None, None
             try:
@@ -52,6 +56,8 @@ class Runner:
                 invoker_id, invoker_port = invoker.id_, invoker.port
                 with invoker:
                     invoker.send({
+                        'executor': (None if self.task.executor is None
+                                     else inspect.getsource(self.task.executor)),
                         'source': submission_source,
                         'args': test.args,
                         'time_limit': self.task.time_limit
@@ -69,7 +75,7 @@ class Runner:
                 return Result(Verdict[result['verdict']], cause, invoker_id, invoker_port)
             output = result['value']
 
-            check_result = self.task.checker.check(test, output, answer)
+            check_result = self.task.checker.check(test, output, answer, **kwargs)
             if check_result.verdict != Verdict.OK:
                 check_result.cause = f'[test {i + 1}] {check_result.cause}'
                 check_result.invoker_id = invoker_id
@@ -93,7 +99,10 @@ class Runner:
         )
 
     def run(self, submission: Submission, source: FnCodeUnit) -> Result:
-        result = self._do_run(source.source)
+        kwargs = {}
+        if self.task.extended_info:
+            kwargs['student_id'] = submission.student.id_
+        result = self._do_run(source.source, **kwargs)
         self.store(source, submission, result)
         return result
 

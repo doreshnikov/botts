@@ -23,7 +23,13 @@ dispatcher.message.middleware(TestingWall())
 
 async def main():
     import botts.testsys.config.hw02 as hw02
+    import botts.testsys.config.midterm as midterm
+    import botts.testsys.config.contest02.var4 as contest02
+    import botts.testsys.config.hw03 as hw03
     _ = hw02.HW02
+    _ = midterm.MIDTERM
+    _ = contest02.CONTEST02
+    _ = hw03.HW03
     await dispatcher.start_polling(BOT)
 
 

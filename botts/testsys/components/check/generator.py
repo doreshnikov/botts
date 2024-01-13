@@ -6,7 +6,7 @@ from typing import Any, Callable, Sequence
 
 @dataclass
 class Arguments:
-    args: tuple[Any]
+    args: tuple
     kwargs: dict[str, Any]
 
 
@@ -92,8 +92,27 @@ class RandomFloat(Generator):
         return random.uniform(low, high)
 
 
+class RandomString(Generator):
+    # noinspection PyMethodOverriding
+    def __call__(self, random: Random, length: int, low: str, high: str):
+        s = ''
+        for i in range(length):
+            s += chr(random.randint(ord(low), ord(high)))
+        return s
+
+
+class RandomPermutation(Generator):
+    # noinspection PyMethodOverriding
+    def __call__(self, random: Random, length: int) -> Any:
+        iota = list(range(length))
+        random.shuffle(iota)
+        return iota
+
+
 R_INT = delay(RandomInteger)
 R_FLOAT = delay(RandomFloat)
+R_STRING = delay(RandomString)
+R_PERM = delay(RandomPermutation)
 
 
 class ArgList(Generator):

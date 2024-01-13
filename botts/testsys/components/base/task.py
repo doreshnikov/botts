@@ -19,6 +19,8 @@ class Task:
     tests: list[Generator | Any]
     solution: Callable[[...], Any] | None
     time_limit: int = field(default=1)
+    executor: Callable[[...], Any] | None = None
+    extended_info: bool = False
 
     def generate_tests(self, random: Random):
         return [generate(test, random) for test in self.tests]
