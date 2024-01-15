@@ -75,7 +75,7 @@ def run_selector(runs: list[Run], prev_page: bool, next_page: bool, middle_text:
 
 
 @master_router.message(Command('runs'))
-@flags.admin(True)
+@flags.teacher(True)
 async def handle_runs(message: Message, state: FSMContext):
     runs_count = Master.runs_count()
     runs = Master.runs(PAGE_SIZE, 0)
@@ -110,6 +110,24 @@ async def edit_runs(message: Message, state: FSMContext, page: int, filters: lis
         'runs': runs,
         'runs_count': runs_count
     })
+
+
+@master_router.callback_query(RunCallback.filter(), MasterState.RUNS_LIST)
+async def handle_run(query: CallbackQuery, bot: Bot):
+    data = RunCallback.unpack(query.data)
+    await query.answer('Fetching run...')
+    run = Run.get_by_id(data.run_id)
+    await bot.send_message(
+        query.from_user.id,
+        f'*Run {run.id_}*\n'
+        f'Task: _{escape_md(run.task_id)}_\n'
+        f'Verdict: `{run.verdict}`\n'
+        f'Comment: `{escape_md(str(run.comment))}`\n\n'
+        f'```python\n'
+        f'{run.solution_source}\n'
+        f'```',
+        parse_mode='MarkdownV2'
+    )
 
 
 @master_router.callback_query(FilterCallback.filter(), MasterState.RUNS_LIST)

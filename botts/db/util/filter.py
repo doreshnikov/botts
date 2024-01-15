@@ -88,7 +88,7 @@ class DBFilter:
     @staticmethod
     def parse(s: str, safe: bool = True):
         # TODO make safer
-        items = s.split(' ')
+        items = s.split(' ', maxsplit=2)
         model, field = items[0].split('.')
         if items[2].startswith("'") and items[2].endswith("'"):
             items[2] = items[2][1:-1]

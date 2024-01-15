@@ -3,4 +3,5 @@ def escape_md(s: str):
             .replace('_', '\\_')
             .replace('*', '\\*')
             .replace('[', '\\[')
-            .replace('`', '\\`'))
+            .replace('`', '\\`')
+            .replace('-', '\\-'))

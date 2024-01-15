@@ -260,7 +260,7 @@ with open('resources/tests/large-json.json', 'r') as f:
 
 HW03 = Event(
     'Homework 03',
-    datetime(year=2024, month=1, day=15, hour=0, minute=0, second=0),
+    datetime(year=2024, month=1, day=15, hour=3, minute=0, second=0),
     [
         Task(
             id_='0-happy-new-year',
