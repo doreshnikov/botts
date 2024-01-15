@@ -4,5 +4,5 @@ from run
          join student on submission.student_id = student.id_
 where
     run.verdict = 'OK' and
-    submission.event = 'contest-02'
+    submission.event = 'midterm'
 group by name, task_id;

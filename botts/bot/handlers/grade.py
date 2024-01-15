@@ -17,6 +17,7 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 from botts.bot.config.local import ADMIN_ID, report_event
 from botts.bot.util.text import escape_md
+from botts.db import database
 from botts.db.dao.students import Students
 from botts.db.run import Run
 from botts.db.student import Student
@@ -258,3 +259,16 @@ async def handle_event_status(query: CallbackQuery, state: FSMContext, _student:
         parse_mode='Markdown'
     )
     await state.clear()
+
+
+@grade_router.message(Command('compression_rate'))
+@flags.authorized(True)
+async def handle_compression_rate(message: Message, _student: Student):
+    cursor = database.execute_sql(
+        'select rate from compression_rate where student_id = ?',
+        (_student.id_,)
+    ).fetchall()
+    if len(cursor) == 0:
+        await message.reply('Вы еще не решили задание _3-encode-decode_', parse_mode='Markdown')
+    else:
+        await message.reply(f'Ваш compression rate в _3-encode-decode_ равен {cursor[0][0]}', parse_mode='Markdown')

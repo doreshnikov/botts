@@ -50,8 +50,11 @@ class AuthorizationMiddleware(BaseMiddleware):
                 f'станут доступны другие команды.'
             )
             return False
+        if get_flag(data, 'teacher'):
+            if student.group not in ('teacher', 'admin'):
+                return False
         if get_flag(data, 'admin'):
             tg_id = student.tg_user.first().tg_id
-            if tg_id != ADMIN_ID:
+            if student.tg_user.id_ != ADMIN_ID:
                 return False
         return await handler(event, data)

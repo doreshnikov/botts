@@ -17,7 +17,7 @@ from run r1
               on r1.solution_hash = rsst2.solution_hash
                   and r1.task_id = rsst2.task_id
                   and s1.student_id < rsst2.student_id
-where r1.verdict = 'OK' and rsst2.verdict = 'OK'
+-- where r1.verdict = 'OK' and rsst2.verdict = 'OK'
 group by s1.student_id, rsst2.student_id
 having c > 0
 order by c desc;
