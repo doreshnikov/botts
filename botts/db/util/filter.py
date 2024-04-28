@@ -43,6 +43,9 @@ class DBFilter:
         field_name = self.field
         if not hasattr(model, self.field):
             field_name += '_'
+        if not hasattr(model, field_name):
+            raise TypeError(f'no field \'{field_name}\' in {model.__name__}')
+
         field: Field = getattr(model, field_name)
         field_type = field.field_type
         python_type = DBFilter._types_mapping.get(field_type)

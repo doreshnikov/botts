@@ -75,7 +75,7 @@ async def handle_name(message: Message, state: FSMContext):
             parse_mode='Markdown'
         )
         await state.update_data({'confirmation_message': confirmation_message})
-    elif len(options) <= 5:
+    elif len(options) <= 7:
         names = [student.name for student in options]
         await state.update_data({'names': names})
         keyboard = [
