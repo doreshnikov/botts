@@ -48,7 +48,7 @@ class Invoker:
             except Exception as e:
                 queue.put({
                     'verdict': 'RE',
-                    'message': f'could not compile: \'{e}\''
+                    'message': f'could not run: \'{e}\''
                 })
                 return
             try:

@@ -45,13 +45,10 @@ class CatsAndMiceGenerator(Generator):
             i, j = random.randint(0, h - 1), random.randint(0, w - 1)
             mapping[i][j] = "m"
 
-        return Arguments(
-            args=(
-                "\n".join("".join(row) for row in mapping),
-                random.randint(5, w + h - 2)
-            ),
-            kwargs={}
-        )
+        return Arguments(args=(
+            "\n".join("".join(row) for row in mapping),
+            random.randint(5, w + h - 2)
+        ), kwargs={})
 
 
 def exchange(lst):

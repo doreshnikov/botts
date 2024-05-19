@@ -11,6 +11,10 @@ from typing import Any
 import docker
 
 from botts.bot.config.local import report_fail
+from botts.testsys.components.base.units import CodeUnit
+from botts.testsys.components.check.checker import Verdict
+from botts.testsys.components.check.generator import Arguments
+from botts.testsys.components.test.invoker_base import InvokerBase, TestingResult
 
 
 class Status(Enum):
@@ -24,7 +28,7 @@ class FailedContainerException(Exception):
         self.logs = logs
 
 
-class SocketWrapper:
+class SocketWrapper(InvokerBase):
     HOST = '127.0.0.1'
     CHUNK_SIZE = 1024
     INVOKER_TIMEOUT = 30
@@ -71,6 +75,18 @@ class SocketWrapper:
                 'message': f'invoker failed to respond in {SocketWrapper.INVOKER_TIMEOUT}s'
             }
 
+    def invoke(self, source: str | CodeUnit, args: Arguments, time_limit: int | float,
+               executor: str | None) -> TestingResult:
+        self.send({
+            'executor': executor,
+            'source': source,
+            'args': args,
+            'time_limit': time_limit
+        })
+        result = self.receive()
+        message = result.get('message', result.get('error', None))
+        return TestingResult(Verdict[result['verdict']], message, result.get('value', None))
+
 
 class InvokerPool:
     def __init__(self):
@@ -83,7 +99,7 @@ class InvokerPool:
             startup.wait()
         with open(config_file) as config:
             self.config = json.load(config)
-            self.config = {int(port): id_ for port, id_ in self.config.items()}
+            self.config = {int(port): id_ for port, id_ in self.config['remote'].items()}
 
         self.status: dict[int, Status] = {}
         self.queue = Queue()
