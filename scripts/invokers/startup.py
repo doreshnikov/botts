@@ -30,6 +30,7 @@ if low < 65000 or high < low:
 
 LABEL = 'invoker'
 TAG = '0.1gamma'
+INVOKER = 'invoker_mp.py'
 
 logger.info('Setting up Docker client...')
 client = docker.client.from_env()
@@ -70,7 +71,7 @@ for port in range(low, high + 1):
         f'{LABEL}:{TAG}',
         ports={f'{port}/tcp': f'{port}'},
         tty=True, detach=True,
-        command=f'{port}'
+        command=f'{INVOKER} {port}'
     )
     logger.info(f'> done, {cnt}')
     invokers[port] = cnt.id
@@ -83,4 +84,8 @@ for port in range(low, high + 1):
     logger.info('> done')
 
 with open('invokers.json', 'w') as config_file:
+    invokers = {
+        'remote': invokers,
+        'basic': 2
+    }
     json.dump(invokers, config_file, indent=2)
