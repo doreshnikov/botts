@@ -60,6 +60,7 @@ class InvokerISO(InvokerServiceBase):
                 response['message'] = f'took more than {time_limit}s to complete'
 
         response.update(result)
+        os.system('isolate --cleanup')
         self.logger.info('Testing complete')
 
 
