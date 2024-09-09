@@ -11,8 +11,8 @@ from ..extract.jupyter import Locator
 
 @dataclass
 class Statement:
-    md: str | None
-    html: str | None
+    md: str | None = field(default=None)
+    html: str | None = field(default=None)
 
 
 @dataclass
@@ -24,7 +24,7 @@ class Task:
     checker: Checker
     tests: list[Generator | Any]
     solution: Callable[[...], Any] | None
-    statement: Statement
+    statement: Statement = field(default_factory=Statement)
     time_limit: int = field(default=1)
     executor: Callable[[...], Any] | None = None
     extended_info: bool = False
