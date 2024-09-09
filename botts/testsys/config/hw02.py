@@ -1,4 +1,3 @@
-import math
 import numbers
 import re
 from datetime import datetime
@@ -6,41 +5,12 @@ from typing import Any
 
 from ..components.base.include import inc
 from ..components.base.task import Task
-from ..components.check.checker import Checker, SequenceOf, Result, SINGLE_FLOAT_4, SINGLE_FLOAT_6, SINGLE_STRING, \
+from ..components.check.checker import Checker, SequenceOf, Result, SINGLE_FLOAT_6, SINGLE_STRING, \
     Verdict
 from ..components.check.generator import ArgList, Arguments, H, R_INT, R_FLOAT
 from ..components.check.validator import NO_EVAL, NO_EXEC, NO_IMPORTS, NO_RECURSION, REQ_RECURSION
 from ..components.extract.jupyter import FnLocator
 from ..components.test.event import Event
-
-
-def triangle_area(a, b, c):
-    v1x, v1y = b[0] - a[0], b[1] - a[1]
-    v2x, v2y = c[0] - a[0], c[1] - a[1]
-    value = (v1x * v2y - v2x * v1y) / 2
-    return abs(value)
-
-
-def angle(a, b, c):
-    v1x, v1y = a[0] - b[0], a[1] - b[1]
-    v2x, v2y = c[0] - b[0], c[1] - b[1]
-    y = v1x * v2y - v2x * v1y
-    x = v1x * v2x + v1y * v2y
-    return abs(math.degrees(math.atan2(y, x)))
-
-
-def normal_cdf(x, mu, sigma):
-    return 0.5 * (1 + math.erf((x - mu) / sigma / math.sqrt(2)))
-
-
-def highest_point(m, alpha, v):
-    g = 9.81
-    return (v * math.sin(math.radians(alpha))) ** 2 / 2 / g
-
-
-def travel_distance(m, alpha, v):
-    g = 9.81
-    return v * v * math.sin(2 * math.radians(alpha)) / g
 
 
 def polynomial_add(p, q):
@@ -237,111 +207,10 @@ def approximation(a, k, n):
     return x
 
 
-R_POINT = R_FLOAT(-100.0, 100.0).repeat(2)
-
 HW02 = Event(
     'Homework 02',
     datetime(year=2023, month=11, day=5, hour=0, minute=0, second=0),
     [
-        Task(
-            id_='1-1-triangle-area',
-            locator=FnLocator('triangle_area'),
-            include=[
-                inc('import math'),
-                inc('point = tuple[float, float]')
-            ],
-            validator=NO_IMPORTS & NO_EXEC & NO_EVAL,
-            checker=SINGLE_FLOAT_6,
-            tests=[
-                ArgList((0.0, 0.0), (0.0, 0.0), (0.0, 0.0)),
-                ArgList((0.0, 0.0), (5.0, 5.0), (10.0, 10.0)),
-                *H.repeat_test(
-                    ArgList(R_POINT, R_POINT, R_POINT),
-                    8
-                )
-            ],
-            solution=triangle_area
-        ),
-        Task(
-            id_='1-2-angle',
-            locator=FnLocator('angle'),
-            include=[
-                inc('import math'),
-                inc('point = tuple[float, float]')
-            ],
-            validator=NO_IMPORTS & NO_EXEC & NO_EVAL,
-            checker=SINGLE_FLOAT_4,
-            tests=[
-                ArgList((0.0, 0.0), (3.3, 0.0), (0.0, 3.3)),
-                ArgList((-2.0, -2.0), (0.0, 0.0), (5.0, 5.0)),
-                ArgList((-2.0, 2.0), (0.0, 0.0), (4.0, -4.0)),
-                *H.repeat_test(
-                    ArgList(R_POINT, R_POINT, R_POINT).retry_until(H.distinct),
-                    7
-                )
-            ],
-            solution=angle
-        ),
-        Task(
-            id_='1-3-normal-cdf',
-            locator=FnLocator('normal_cdf'),
-            include=[
-                inc('import math')
-            ],
-            validator=NO_IMPORTS & NO_EXEC & NO_EVAL,
-            checker=SINGLE_FLOAT_6,
-            tests=[
-                ArgList(42.0, 42.0, 13.0),
-                ArgList(32.0, 42.0, 13.0),
-                *H.repeat_test(
-                    ArgList(R_FLOAT(-10.0, 10.0), R_FLOAT(-10.0, 10.0), R_FLOAT(0.1, 4.0)),
-                    4
-                ),
-                *H.repeat_test(
-                    ArgList(R_FLOAT(-100.0, 100.0), R_FLOAT(-10.0, 10.0), R_FLOAT(0.1, 10.0)),
-                    4
-                )
-            ],
-            solution=normal_cdf
-        ),
-        Task(
-            id_='1-5-highest-point',
-            locator=FnLocator('highest_point'),
-            include=[
-                inc('import math'),
-                inc('g = 9.81')
-            ],
-            validator=NO_IMPORTS & NO_EXEC & NO_EVAL,
-            checker=SINGLE_FLOAT_6,
-            tests=[
-                ArgList(12.0, 45.0, 10.0),
-                ArgList(10.0, 90.0, 10.0),
-                *H.repeat_test(
-                    ArgList(R_FLOAT(0.1, 100.0), R_FLOAT(0.1, 179.9), R_FLOAT(0.1, 100.0)),
-                    number=13
-                )
-            ],
-            solution=highest_point
-        ),
-        Task(
-            id_='1-6-travel-distance',
-            locator=FnLocator('travel_distance'),
-            include=[
-                inc('import math'),
-                inc('g = 9.81')
-            ],
-            validator=NO_IMPORTS & NO_EXEC & NO_EVAL,
-            checker=SINGLE_FLOAT_6,
-            tests=[
-                ArgList(12.0, 45.0, 10.0),
-                ArgList(10.0, 90.0, 10.0),
-                *H.repeat_test(
-                    ArgList(R_FLOAT(0.1, 100.0), R_FLOAT(0.1, 179.9), R_FLOAT(0.1, 100.0)),
-                    number=13
-                )
-            ],
-            solution=travel_distance
-        ),
         Task(
             id_='2-0-add-modified',
             locator=FnLocator('add'),
