@@ -11,8 +11,8 @@ class Run(Model):
     solution_hash = CharField()
     verdict = CharField()
     comment = CharField(null=True)
-    invoker_port = IntegerField()
-    invoker_id = CharField()
+    invoker_port = IntegerField(null=True)
+    invoker_id = CharField(null=True)
     submission = ForeignKeyField(
         Submission, backref='runs', field='id_',
         lazy_load=False
