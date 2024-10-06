@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "botts"
+version = "0.1.0"
+description = ""
+authors = ["Daniil Oreshnikov <dan.io.oreshnikov@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+aiogram = "^3.13.1"
+emoji = "^2.13.4"
+
+[tool.poetry.group.dev.dependencies]
+setuptools = "^75.1.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
