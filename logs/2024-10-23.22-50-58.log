@@ -1,0 +1,3 @@
+[23.10.24 22:50:58] INFO [invoker.start:146] Starting service...
+[23.10.24 22:51:02] INFO [invoker.process:114] Received request b'\x80\x04\x95\x85\x00\x00\x00\x00\x00\x00\x00}\x94(\x8c\x08executor\x94N\x8c\x06source\x94\x8cQdef guess():\n    include_me = 1\n    yield include_me * (include_me+1)\n    guess()\x94\x8c\x04args\x94)\x8c\ntime_limit\x94K\x01u.'
+[23.10.24 22:51:02] INFO [invoker.validate:82] Received data parsed into {'executor': None, 'source': 'def guess():\n    include_me = 1\n    yield include_me * (include_me+1)\n    guess()', 'args': (), 'time_limit': 1}

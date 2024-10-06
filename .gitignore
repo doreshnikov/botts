@@ -3,6 +3,7 @@ resources/examples/
 *.db
 *.db*
 config.toml
+.DS_Store
 
 venv/
 __pycache__/

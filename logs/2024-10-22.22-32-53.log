@@ -1,0 +1,100 @@
+[22.10.24 22:32:53] DEBUG [asyncio.__init__:64] Using selector: KqueueSelector
+[22.10.24 22:32:53] INFO [aiogram.dispatcher.start_polling:527] Start polling
+[22.10.24 22:32:53] INFO [aiogram.dispatcher._polling:341] Run polling for bot @testing_dummy_bot id=6377300361 - 'Testing Dummy'
+[22.10.24 22:32:53] DEBUG [root.__call__:92] Event: {
+  "update_id": 802862076,
+  "message": {
+    "message_id": 3491,
+    "chat": {
+      "id": 265837243,
+      "type": "private",
+      "username": "doreshnikov"
+    },
+    "from_user": {
+      "id": 265837243,
+      "username": "doreshnikov"
+    },
+    "text": "/grade"
+  }
+}
+[22.10.24 22:32:53] DEBUG [root.__call__:97] State: None
+[22.10.24 22:32:53] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."id_", "t1"."name", "t1"."speciality", "t1"."group" FROM "student" AS "t1" INNER JOIN "tg_user" AS "t2" ON ("t2"."student_id" = "t1"."id_") WHERE ("t2"."tg_id" = ?) LIMIT ?', [265837243, 1])
+[22.10.24 22:32:53] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."student_id", "t1"."tg_id", "t1"."username" FROM "tg_user" AS "t1" WHERE ("t1"."student_id" = ?) LIMIT ?', [0, 1])
+[22.10.24 22:32:53] INFO [aiogram.event.feed_update:172] Update id=802862076 is handled. Duration 490 ms by bot id=6377300361
+[22.10.24 22:33:24] DEBUG [root.__call__:92] Event: {
+  "update_id": 802862077,
+  "callback_query": {
+    "id": "1141762264829108946",
+    "from_user": {
+      "id": 265837243,
+      "username": "doreshnikov"
+    },
+    "chat_instance": "5810223480658792996",
+    "data": "event:00-introduction"
+  }
+}
+[22.10.24 22:33:24] DEBUG [root.__call__:97] State: GradeState:EVENT_SELECT
+[22.10.24 22:33:24] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."id_", "t1"."name", "t1"."speciality", "t1"."group" FROM "student" AS "t1" INNER JOIN "tg_user" AS "t2" ON ("t2"."student_id" = "t1"."id_") WHERE ("t2"."tg_id" = ?) LIMIT ?', [265837243, 1])
+[22.10.24 22:33:24] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."student_id", "t1"."tg_id", "t1"."username" FROM "tg_user" AS "t1" WHERE ("t1"."student_id" = ?) LIMIT ?', [0, 1])
+[22.10.24 22:33:24] INFO [aiogram.event.feed_update:172] Update id=802862077 is handled. Duration 280 ms by bot id=6377300361
+[22.10.24 22:33:25] DEBUG [root.__call__:92] Event: {
+  "update_id": 802862078,
+  "callback_query": {
+    "id": "1141762268387221258",
+    "from_user": {
+      "id": 265837243,
+      "username": "doreshnikov"
+    },
+    "chat_instance": "5810223480658792996",
+    "data": "format:text"
+  }
+}
+[22.10.24 22:33:25] DEBUG [root.__call__:97] State: GradeState:FORMAT_SELECT
+[22.10.24 22:33:25] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."id_", "t1"."name", "t1"."speciality", "t1"."group" FROM "student" AS "t1" INNER JOIN "tg_user" AS "t2" ON ("t2"."student_id" = "t1"."id_") WHERE ("t2"."tg_id" = ?) LIMIT ?', [265837243, 1])
+[22.10.24 22:33:25] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."student_id", "t1"."tg_id", "t1"."username" FROM "tg_user" AS "t1" WHERE ("t1"."student_id" = ?) LIMIT ?', [0, 1])
+[22.10.24 22:33:25] INFO [aiogram.event.feed_update:172] Update id=802862078 is handled. Duration 265 ms by bot id=6377300361
+[22.10.24 22:33:26] DEBUG [root.__call__:92] Event: {
+  "update_id": 802862079,
+  "message": {
+    "message_id": 3493,
+    "chat": {
+      "id": 265837243,
+      "type": "private",
+      "username": "doreshnikov"
+    },
+    "from_user": {
+      "id": 265837243,
+      "username": "doreshnikov"
+    },
+    "text": "def whoami(): print('admin')"
+  }
+}
+[22.10.24 22:33:26] DEBUG [root.__call__:97] State: GradeState:CODE
+[22.10.24 22:33:26] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."id_", "t1"."name", "t1"."speciality", "t1"."group" FROM "student" AS "t1" INNER JOIN "tg_user" AS "t2" ON ("t2"."student_id" = "t1"."id_") WHERE ("t2"."tg_id" = ?) LIMIT ?', [265837243, 1])
+[22.10.24 22:33:26] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."student_id", "t1"."tg_id", "t1"."username" FROM "tg_user" AS "t1" WHERE ("t1"."student_id" = ?) LIMIT ?', [0, 1])
+[22.10.24 22:33:26] DEBUG [peewee.execute_sql:3319] ('INSERT INTO "submission" ("timestamp", "event", "file_path", "message_id", "student_id") VALUES (?, ?, ?, ?, ?)', [1729625607, '00-introduction', None, 3494, 0])
+[22.10.24 22:33:26] INFO [aiogram.event.feed_update:172] Update id=802862079 is handled. Duration 172 ms by bot id=6377300361
+[22.10.24 22:33:26] DEBUG [aiogram.utils.chat_action._worker:70] Started chat action 'typing' sender in chat_id=265837243 via bot id=6377300361
+[22.10.24 22:33:26] INFO [socket-wrapper.__enter__:42] Connected on port 65509
+[22.10.24 22:33:26] INFO [socket-wrapper.__exit__:47] Released port 65509
+[22.10.24 22:33:26] DEBUG [aiogram.utils.chat_action._worker:81] Sent chat action 'typing' to chat_id=265837243 via bot 6377300361 (already sent actions 0)
+[22.10.24 22:33:26] DEBUG [aiogram.utils.chat_action._worker:98] Finished chat action 'typing' sender in chat_id=265837243 via bot id=6377300361
+[22.10.24 22:33:26] ERROR [asyncio.default_exception_handler:1820] Task exception was never retrieved
+future: <Task finished name='Task-29' coro=<Event.run() done, defined at /Users/doreshhh/Projects/my/botts/botts/testsys/components/test/event.py:37> exception=EOFError('Ran out of input')>
+Traceback (most recent call last):
+  File "/Users/doreshhh/Projects/my/botts/botts/testsys/components/test/event.py", line 62, in run
+    results[task.id_] = Runner(task).run(submission, solution)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/doreshhh/Projects/my/botts/botts/testsys/components/test/runner.py", line 105, in run
+    result = self._do_run(source.source, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/doreshhh/Projects/my/botts/botts/testsys/components/test/runner.py", line 65, in _do_run
+    result = invoker.receive()
+             ^^^^^^^^^^^^^^^^^
+  File "/Users/doreshhh/Projects/my/botts/botts/testsys/components/test/invoker_pool.py", line 64, in receive
+    return pickle.loads(data[:size])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+EOFError: Ran out of input
+[22.10.24 22:33:30] WARNING [aiogram.dispatcher._signal_stop_polling:455] Received SIGINT signal
+[22.10.24 22:33:30] INFO [aiogram.dispatcher._polling:359] Polling stopped for bot @testing_dummy_bot id=6377300361 - 'Testing Dummy'
+[22.10.24 22:33:30] INFO [aiogram.dispatcher.start_polling:554] Polling stopped

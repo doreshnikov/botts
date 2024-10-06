@@ -1,0 +1,7 @@
+services:
+  invoker:
+    build:
+      context: ./invoker
+      dockerfile: Dockerfile
+    ports:
+      - 8080-8100:80

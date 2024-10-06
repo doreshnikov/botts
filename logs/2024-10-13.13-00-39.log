@@ -1,0 +1,745 @@
+[13.10.24 13:00:39] DEBUG [asyncio.__init__:64] Using selector: KqueueSelector
+[13.10.24 13:00:39] INFO [aiogram.dispatcher.start_polling:527] Start polling
+[13.10.24 13:00:40] INFO [aiogram.dispatcher._polling:341] Run polling for bot @testing_dummy_bot id=6377300361 - 'Testing Dummy'
+[13.10.24 13:00:47] DEBUG [root.__call__:92] Event: {
+  "update_id": 802862015,
+  "message": {
+    "message_id": 3428,
+    "chat": {
+      "id": 265837243,
+      "type": "private",
+      "username": "doreshnikov"
+    },
+    "from_user": {
+      "id": 265837243,
+      "username": "doreshnikov"
+    },
+    "text": "/register"
+  }
+}
+[13.10.24 13:00:47] DEBUG [root.__call__:97] State: None
+[13.10.24 13:00:47] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."id_", "t1"."name", "t1"."speciality", "t1"."group" FROM "student" AS "t1" INNER JOIN "tg_user" AS "t2" ON ("t2"."student_id" = "t1"."id_") WHERE ("t2"."tg_id" = ?) LIMIT ?', [265837243, 1])
+[13.10.24 13:00:47] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."student_id", "t1"."tg_id", "t1"."username" FROM "tg_user" AS "t1" WHERE ("t1"."student_id" = ?) LIMIT ?', [0, 1])
+[13.10.24 13:00:47] INFO [aiogram.event.feed_update:172] Update id=802862015 is handled. Duration 245 ms by bot id=6377300361
+[13.10.24 13:00:51] DEBUG [root.__call__:92] Event: {
+  "update_id": 802862016,
+  "message": {
+    "message_id": 3430,
+    "chat": {
+      "id": 265837243,
+      "type": "private",
+      "username": "doreshnikov"
+    },
+    "from_user": {
+      "id": 265837243,
+      "username": "doreshnikov"
+    },
+    "text": "/grade"
+  }
+}
+[13.10.24 13:00:51] DEBUG [root.__call__:97] State: None
+[13.10.24 13:00:51] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."id_", "t1"."name", "t1"."speciality", "t1"."group" FROM "student" AS "t1" INNER JOIN "tg_user" AS "t2" ON ("t2"."student_id" = "t1"."id_") WHERE ("t2"."tg_id" = ?) LIMIT ?', [265837243, 1])
+[13.10.24 13:00:51] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."student_id", "t1"."tg_id", "t1"."username" FROM "tg_user" AS "t1" WHERE ("t1"."student_id" = ?) LIMIT ?', [0, 1])
+[13.10.24 13:00:51] INFO [aiogram.event.feed_update:172] Update id=802862016 is handled. Duration 68 ms by bot id=6377300361
+[13.10.24 13:00:53] DEBUG [root.__call__:92] Event: {
+  "update_id": 802862017,
+  "callback_query": {
+    "id": "1141762266987116246",
+    "from_user": {
+      "id": 265837243,
+      "username": "doreshnikov"
+    },
+    "chat_instance": "5810223480658792996",
+    "data": "event:00-introduction"
+  }
+}
+[13.10.24 13:00:53] DEBUG [root.__call__:97] State: GradeState:EVENT_SELECT
+[13.10.24 13:00:53] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."id_", "t1"."name", "t1"."speciality", "t1"."group" FROM "student" AS "t1" INNER JOIN "tg_user" AS "t2" ON ("t2"."student_id" = "t1"."id_") WHERE ("t2"."tg_id" = ?) LIMIT ?', [265837243, 1])
+[13.10.24 13:00:53] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."student_id", "t1"."tg_id", "t1"."username" FROM "tg_user" AS "t1" WHERE ("t1"."student_id" = ?) LIMIT ?', [0, 1])
+[13.10.24 13:00:53] INFO [aiogram.event.feed_update:172] Update id=802862017 is handled. Duration 166 ms by bot id=6377300361
+[13.10.24 13:00:55] DEBUG [root.__call__:92] Event: {
+  "update_id": 802862018,
+  "callback_query": {
+    "id": "1141762265938840891",
+    "from_user": {
+      "id": 265837243,
+      "username": "doreshnikov"
+    },
+    "chat_instance": "5810223480658792996",
+    "data": "format:text"
+  }
+}
+[13.10.24 13:00:55] DEBUG [root.__call__:97] State: GradeState:FORMAT_SELECT
+[13.10.24 13:00:55] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."id_", "t1"."name", "t1"."speciality", "t1"."group" FROM "student" AS "t1" INNER JOIN "tg_user" AS "t2" ON ("t2"."student_id" = "t1"."id_") WHERE ("t2"."tg_id" = ?) LIMIT ?', [265837243, 1])
+[13.10.24 13:00:55] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."student_id", "t1"."tg_id", "t1"."username" FROM "tg_user" AS "t1" WHERE ("t1"."student_id" = ?) LIMIT ?', [0, 1])
+[13.10.24 13:00:56] INFO [aiogram.event.feed_update:172] Update id=802862018 is handled. Duration 241 ms by bot id=6377300361
+[13.10.24 13:01:14] DEBUG [root.__call__:92] Event: {
+  "update_id": 802862019,
+  "message": {
+    "message_id": 3432,
+    "chat": {
+      "id": 265837243,
+      "type": "private",
+      "username": "doreshnikov"
+    },
+    "from_user": {
+      "id": 265837243,
+      "username": "doreshnikov"
+    },
+    "text": "def whoami():\n  print('Еремеева Елизавета')\n\na = []\ndef unique(a):\n  b = []\n  for i in a:\n    if i not in b:\n      b.append(i)\n  return(b)"
+  }
+}
+[13.10.24 13:01:14] DEBUG [root.__call__:97] State: GradeState:CODE
+[13.10.24 13:01:14] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."id_", "t1"."name", "t1"."speciality", "t1"."group" FROM "student" AS "t1" INNER JOIN "tg_user" AS "t2" ON ("t2"."student_id" = "t1"."id_") WHERE ("t2"."tg_id" = ?) LIMIT ?', [265837243, 1])
+[13.10.24 13:01:14] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."student_id", "t1"."tg_id", "t1"."username" FROM "tg_user" AS "t1" WHERE ("t1"."student_id" = ?) LIMIT ?', [0, 1])
+[13.10.24 13:01:14] DEBUG [peewee.execute_sql:3319] ('INSERT INTO "submission" ("timestamp", "event", "file_path", "message_id", "student_id") VALUES (?, ?, ?, ?, ?)', [1728813674, '00-introduction', None, 3433, 0])
+[13.10.24 13:01:14] INFO [aiogram.event.feed_update:172] Update id=802862019 is handled. Duration 203 ms by bot id=6377300361
+[13.10.24 13:01:14] DEBUG [aiogram.utils.chat_action._worker:70] Started chat action 'typing' sender in chat_id=265837243 via bot id=6377300361
+[13.10.24 13:01:14] INFO [socket-wrapper.__enter__:47] Connected on port 8093
+[13.10.24 13:01:14] INFO [socket-wrapper.__exit__:52] Released port 8093
+[13.10.24 13:01:14] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."id_", "t1"."name", "t1"."speciality", "t1"."group" FROM "student" AS "t1" WHERE ("t1"."id_" = ?) LIMIT ?', [0, 1])
+[13.10.24 13:01:14] DEBUG [peewee.execute_sql:3319] ('INSERT INTO "run" ("task_id", "solution_source", "solution_hash", "verdict", "comment", "invoker_port", "invoker_id", "submission_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?)', ['whoami', "def whoami():\n  print('Еремеева Елизавета')", '8791462947495511859', 'WA', "[test 1] result 'Еремеева Елизавета\n' is not your name", 8093, '898f3168db756bc287105efe7058db5317fac9654679f08b9e7fd84930fb4557', 237])
+[13.10.24 13:01:14] DEBUG [aiogram.utils.chat_action._worker:81] Sent chat action 'typing' to chat_id=265837243 via bot 6377300361 (already sent actions 0)
+[13.10.24 13:01:14] INFO [socket-wrapper.__enter__:47] Connected on port 8094
+[13.10.24 13:01:14] INFO [socket-wrapper.__exit__:52] Released port 8094
+[13.10.24 13:01:14] INFO [socket-wrapper.__enter__:47] Connected on port 8093
+[13.10.24 13:01:14] INFO [socket-wrapper.__exit__:52] Released port 8093
+[13.10.24 13:01:14] INFO [socket-wrapper.__enter__:47] Connected on port 8094
+[13.10.24 13:01:14] INFO [socket-wrapper.__exit__:52] Released port 8094
+[13.10.24 13:01:14] INFO [socket-wrapper.__enter__:47] Connected on port 8093
+[13.10.24 13:01:14] INFO [socket-wrapper.__exit__:52] Released port 8093
+[13.10.24 13:01:14] INFO [socket-wrapper.__enter__:47] Connected on port 8094
+[13.10.24 13:01:14] INFO [socket-wrapper.__exit__:52] Released port 8094
+[13.10.24 13:01:14] INFO [socket-wrapper.__enter__:47] Connected on port 8093
+[13.10.24 13:01:14] INFO [socket-wrapper.__exit__:52] Released port 8093
+[13.10.24 13:01:14] INFO [socket-wrapper.__enter__:47] Connected on port 8094
+[13.10.24 13:01:14] INFO [socket-wrapper.__exit__:52] Released port 8094
+[13.10.24 13:01:14] DEBUG [peewee.execute_sql:3319] ('INSERT INTO "run" ("task_id", "solution_source", "solution_hash", "verdict", "comment", "invoker_port", "invoker_id", "submission_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?)', ['unique', 'def unique(a):\n  b = []\n  for i in a:\n    if i not in b:\n      b.append(i)\n  return(b)', '-4531790645984384260', 'OK', None, None, None, 237])
+[13.10.24 13:01:14] DEBUG [aiogram.utils.chat_action._worker:98] Finished chat action 'typing' sender in chat_id=265837243 via bot id=6377300361
+[13.10.24 13:01:20] DEBUG [root.__call__:92] Event: {
+  "update_id": 802862020,
+  "message": {
+    "message_id": 3434,
+    "chat": {
+      "id": 265837243,
+      "type": "private",
+      "username": "doreshnikov"
+    },
+    "from_user": {
+      "id": 265837243,
+      "username": "doreshnikov"
+    },
+    "text": "/grade"
+  }
+}
+[13.10.24 13:01:20] DEBUG [root.__call__:97] State: None
+[13.10.24 13:01:20] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."id_", "t1"."name", "t1"."speciality", "t1"."group" FROM "student" AS "t1" INNER JOIN "tg_user" AS "t2" ON ("t2"."student_id" = "t1"."id_") WHERE ("t2"."tg_id" = ?) LIMIT ?', [265837243, 1])
+[13.10.24 13:01:20] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."student_id", "t1"."tg_id", "t1"."username" FROM "tg_user" AS "t1" WHERE ("t1"."student_id" = ?) LIMIT ?', [0, 1])
+[13.10.24 13:01:20] INFO [aiogram.event.feed_update:172] Update id=802862020 is handled. Duration 100 ms by bot id=6377300361
+[13.10.24 13:01:21] DEBUG [root.__call__:92] Event: {
+  "update_id": 802862021,
+  "callback_query": {
+    "id": "1141762266580746979",
+    "from_user": {
+      "id": 265837243,
+      "username": "doreshnikov"
+    },
+    "chat_instance": "5810223480658792996",
+    "data": "event:00-introduction"
+  }
+}
+[13.10.24 13:01:21] DEBUG [root.__call__:97] State: GradeState:EVENT_SELECT
+[13.10.24 13:01:21] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."id_", "t1"."name", "t1"."speciality", "t1"."group" FROM "student" AS "t1" INNER JOIN "tg_user" AS "t2" ON ("t2"."student_id" = "t1"."id_") WHERE ("t2"."tg_id" = ?) LIMIT ?', [265837243, 1])
+[13.10.24 13:01:21] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."student_id", "t1"."tg_id", "t1"."username" FROM "tg_user" AS "t1" WHERE ("t1"."student_id" = ?) LIMIT ?', [0, 1])
+[13.10.24 13:01:21] INFO [aiogram.event.feed_update:172] Update id=802862021 is handled. Duration 178 ms by bot id=6377300361
+[13.10.24 13:01:23] DEBUG [root.__call__:92] Event: {
+  "update_id": 802862022,
+  "callback_query": {
+    "id": "1141762265422419093",
+    "from_user": {
+      "id": 265837243,
+      "username": "doreshnikov"
+    },
+    "chat_instance": "5810223480658792996",
+    "data": "format:text"
+  }
+}
+[13.10.24 13:01:23] DEBUG [root.__call__:97] State: GradeState:FORMAT_SELECT
+[13.10.24 13:01:23] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."id_", "t1"."name", "t1"."speciality", "t1"."group" FROM "student" AS "t1" INNER JOIN "tg_user" AS "t2" ON ("t2"."student_id" = "t1"."id_") WHERE ("t2"."tg_id" = ?) LIMIT ?', [265837243, 1])
+[13.10.24 13:01:23] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."student_id", "t1"."tg_id", "t1"."username" FROM "tg_user" AS "t1" WHERE ("t1"."student_id" = ?) LIMIT ?', [0, 1])
+[13.10.24 13:01:23] INFO [aiogram.event.feed_update:172] Update id=802862022 is handled. Duration 237 ms by bot id=6377300361
+[13.10.24 13:01:25] DEBUG [root.__call__:92] Event: {
+  "update_id": 802862023,
+  "message": {
+    "message_id": 3436,
+    "chat": {
+      "id": 265837243,
+      "type": "private",
+      "username": "doreshnikov"
+    },
+    "from_user": {
+      "id": 265837243,
+      "username": "doreshnikov"
+    },
+    "text": "def whoami():\n  print('Еремеева Елизавета')\n\na = []\ndef unique(a):\n  b = []\n  for i in a:\n    if i not in b:\n      b.append(i)\n  return(b)"
+  }
+}
+[13.10.24 13:01:25] DEBUG [root.__call__:97] State: GradeState:CODE
+[13.10.24 13:01:25] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."id_", "t1"."name", "t1"."speciality", "t1"."group" FROM "student" AS "t1" INNER JOIN "tg_user" AS "t2" ON ("t2"."student_id" = "t1"."id_") WHERE ("t2"."tg_id" = ?) LIMIT ?', [265837243, 1])
+[13.10.24 13:01:25] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."student_id", "t1"."tg_id", "t1"."username" FROM "tg_user" AS "t1" WHERE ("t1"."student_id" = ?) LIMIT ?', [0, 1])
+[13.10.24 13:01:25] DEBUG [peewee.execute_sql:3319] ('INSERT INTO "submission" ("timestamp", "event", "file_path", "message_id", "student_id") VALUES (?, ?, ?, ?, ?)', [1728813686, '00-introduction', None, 3437, 0])
+[13.10.24 13:01:25] INFO [aiogram.event.feed_update:172] Update id=802862023 is handled. Duration 145 ms by bot id=6377300361
+[13.10.24 13:01:25] DEBUG [aiogram.utils.chat_action._worker:70] Started chat action 'typing' sender in chat_id=265837243 via bot id=6377300361
+[13.10.24 13:01:25] INFO [socket-wrapper.__enter__:47] Connected on port 8093
+[13.10.24 13:01:25] INFO [socket-wrapper.__exit__:52] Released port 8093
+[13.10.24 13:01:25] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."id_", "t1"."name", "t1"."speciality", "t1"."group" FROM "student" AS "t1" WHERE ("t1"."id_" = ?) LIMIT ?', [0, 1])
+[13.10.24 13:01:25] DEBUG [peewee.execute_sql:3319] ('INSERT INTO "run" ("task_id", "solution_source", "solution_hash", "verdict", "comment", "invoker_port", "invoker_id", "submission_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?)', ['whoami', "def whoami():\n  print('Еремеева Елизавета')", '8791462947495511859', 'WA', "[test 1] result 'Еремеева Елизавета\n' is not your name", 8093, '898f3168db756bc287105efe7058db5317fac9654679f08b9e7fd84930fb4557', 238])
+[13.10.24 13:01:25] DEBUG [aiogram.utils.chat_action._worker:81] Sent chat action 'typing' to chat_id=265837243 via bot 6377300361 (already sent actions 0)
+[13.10.24 13:01:25] INFO [socket-wrapper.__enter__:47] Connected on port 8094
+[13.10.24 13:01:25] INFO [socket-wrapper.__exit__:52] Released port 8094
+[13.10.24 13:01:25] INFO [socket-wrapper.__enter__:47] Connected on port 8093
+[13.10.24 13:01:25] INFO [socket-wrapper.__exit__:52] Released port 8093
+[13.10.24 13:01:25] INFO [socket-wrapper.__enter__:47] Connected on port 8094
+[13.10.24 13:01:25] INFO [socket-wrapper.__exit__:52] Released port 8094
+[13.10.24 13:01:25] INFO [socket-wrapper.__enter__:47] Connected on port 8093
+[13.10.24 13:01:25] INFO [socket-wrapper.__exit__:52] Released port 8093
+[13.10.24 13:01:25] INFO [socket-wrapper.__enter__:47] Connected on port 8094
+[13.10.24 13:01:25] INFO [socket-wrapper.__exit__:52] Released port 8094
+[13.10.24 13:01:25] INFO [socket-wrapper.__enter__:47] Connected on port 8093
+[13.10.24 13:01:25] INFO [socket-wrapper.__exit__:52] Released port 8093
+[13.10.24 13:01:25] INFO [socket-wrapper.__enter__:47] Connected on port 8094
+[13.10.24 13:01:25] INFO [socket-wrapper.__exit__:52] Released port 8094
+[13.10.24 13:01:25] DEBUG [peewee.execute_sql:3319] ('INSERT INTO "run" ("task_id", "solution_source", "solution_hash", "verdict", "comment", "invoker_port", "invoker_id", "submission_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?)', ['unique', 'def unique(a):\n  b = []\n  for i in a:\n    if i not in b:\n      b.append(i)\n  return(b)', '-4531790645984384260', 'OK', None, None, None, 238])
+[13.10.24 13:01:25] DEBUG [aiogram.utils.chat_action._worker:98] Finished chat action 'typing' sender in chat_id=265837243 via bot id=6377300361
+[13.10.24 13:01:33] DEBUG [root.__call__:92] Event: {
+  "update_id": 802862024,
+  "message": {
+    "message_id": 3438,
+    "chat": {
+      "id": 265837243,
+      "type": "private",
+      "username": "doreshnikov"
+    },
+    "from_user": {
+      "id": 265837243,
+      "username": "doreshnikov"
+    },
+    "text": "/grade"
+  }
+}
+[13.10.24 13:01:33] DEBUG [root.__call__:97] State: None
+[13.10.24 13:01:33] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."id_", "t1"."name", "t1"."speciality", "t1"."group" FROM "student" AS "t1" INNER JOIN "tg_user" AS "t2" ON ("t2"."student_id" = "t1"."id_") WHERE ("t2"."tg_id" = ?) LIMIT ?', [265837243, 1])
+[13.10.24 13:01:33] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."student_id", "t1"."tg_id", "t1"."username" FROM "tg_user" AS "t1" WHERE ("t1"."student_id" = ?) LIMIT ?', [0, 1])
+[13.10.24 13:01:33] INFO [aiogram.event.feed_update:172] Update id=802862024 is handled. Duration 112 ms by bot id=6377300361
+[13.10.24 13:01:35] DEBUG [root.__call__:92] Event: {
+  "update_id": 802862025,
+  "callback_query": {
+    "id": "1141762265701255034",
+    "from_user": {
+      "id": 265837243,
+      "username": "doreshnikov"
+    },
+    "chat_instance": "5810223480658792996",
+    "data": "event:00-introduction"
+  }
+}
+[13.10.24 13:01:35] DEBUG [root.__call__:97] State: GradeState:EVENT_SELECT
+[13.10.24 13:01:35] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."id_", "t1"."name", "t1"."speciality", "t1"."group" FROM "student" AS "t1" INNER JOIN "tg_user" AS "t2" ON ("t2"."student_id" = "t1"."id_") WHERE ("t2"."tg_id" = ?) LIMIT ?', [265837243, 1])
+[13.10.24 13:01:35] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."student_id", "t1"."tg_id", "t1"."username" FROM "tg_user" AS "t1" WHERE ("t1"."student_id" = ?) LIMIT ?', [0, 1])
+[13.10.24 13:01:35] INFO [aiogram.event.feed_update:172] Update id=802862025 is handled. Duration 359 ms by bot id=6377300361
+[13.10.24 13:01:36] DEBUG [root.__call__:92] Event: {
+  "update_id": 802862026,
+  "callback_query": {
+    "id": "1141762268424992431",
+    "from_user": {
+      "id": 265837243,
+      "username": "doreshnikov"
+    },
+    "chat_instance": "5810223480658792996",
+    "data": "format:text"
+  }
+}
+[13.10.24 13:01:36] DEBUG [root.__call__:97] State: GradeState:FORMAT_SELECT
+[13.10.24 13:01:36] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."id_", "t1"."name", "t1"."speciality", "t1"."group" FROM "student" AS "t1" INNER JOIN "tg_user" AS "t2" ON ("t2"."student_id" = "t1"."id_") WHERE ("t2"."tg_id" = ?) LIMIT ?', [265837243, 1])
+[13.10.24 13:01:36] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."student_id", "t1"."tg_id", "t1"."username" FROM "tg_user" AS "t1" WHERE ("t1"."student_id" = ?) LIMIT ?', [0, 1])
+[13.10.24 13:01:37] INFO [aiogram.event.feed_update:172] Update id=802862026 is handled. Duration 179 ms by bot id=6377300361
+[13.10.24 13:02:01] DEBUG [root.__call__:92] Event: {
+  "update_id": 802862027,
+  "message": {
+    "message_id": 3440,
+    "chat": {
+      "id": 265837243,
+      "type": "private",
+      "username": "doreshnikov"
+    },
+    "from_user": {
+      "id": 265837243,
+      "username": "doreshnikov"
+    },
+    "text": "def whoami():\n  print('Еремеева Елизавета')\n\ndef unique(a):\n  x = 1\n  b = []\n  for i in a:\n    if i not in b:\n      b.append(i)\n  return(b)"
+  }
+}
+[13.10.24 13:02:01] DEBUG [root.__call__:97] State: GradeState:CODE
+[13.10.24 13:02:01] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."id_", "t1"."name", "t1"."speciality", "t1"."group" FROM "student" AS "t1" INNER JOIN "tg_user" AS "t2" ON ("t2"."student_id" = "t1"."id_") WHERE ("t2"."tg_id" = ?) LIMIT ?', [265837243, 1])
+[13.10.24 13:02:01] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."student_id", "t1"."tg_id", "t1"."username" FROM "tg_user" AS "t1" WHERE ("t1"."student_id" = ?) LIMIT ?', [0, 1])
+[13.10.24 13:02:01] DEBUG [peewee.execute_sql:3319] ('INSERT INTO "submission" ("timestamp", "event", "file_path", "message_id", "student_id") VALUES (?, ?, ?, ?, ?)', [1728813722, '00-introduction', None, 3441, 0])
+[13.10.24 13:02:01] INFO [aiogram.event.feed_update:172] Update id=802862027 is handled. Duration 152 ms by bot id=6377300361
+[13.10.24 13:02:01] DEBUG [aiogram.utils.chat_action._worker:70] Started chat action 'typing' sender in chat_id=265837243 via bot id=6377300361
+[13.10.24 13:02:01] INFO [socket-wrapper.__enter__:47] Connected on port 8093
+[13.10.24 13:02:01] INFO [socket-wrapper.__exit__:52] Released port 8093
+[13.10.24 13:02:01] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."id_", "t1"."name", "t1"."speciality", "t1"."group" FROM "student" AS "t1" WHERE ("t1"."id_" = ?) LIMIT ?', [0, 1])
+[13.10.24 13:02:01] DEBUG [peewee.execute_sql:3319] ('INSERT INTO "run" ("task_id", "solution_source", "solution_hash", "verdict", "comment", "invoker_port", "invoker_id", "submission_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?)', ['whoami', "def whoami():\n  print('Еремеева Елизавета')", '8791462947495511859', 'WA', "[test 1] result 'Еремеева Елизавета\n' is not your name", 8093, '898f3168db756bc287105efe7058db5317fac9654679f08b9e7fd84930fb4557', 239])
+[13.10.24 13:02:01] DEBUG [aiogram.utils.chat_action._worker:81] Sent chat action 'typing' to chat_id=265837243 via bot 6377300361 (already sent actions 0)
+[13.10.24 13:02:01] INFO [socket-wrapper.__enter__:47] Connected on port 8094
+[13.10.24 13:02:01] INFO [socket-wrapper.__exit__:52] Released port 8094
+[13.10.24 13:02:01] INFO [socket-wrapper.__enter__:47] Connected on port 8093
+[13.10.24 13:02:01] INFO [socket-wrapper.__exit__:52] Released port 8093
+[13.10.24 13:02:01] INFO [socket-wrapper.__enter__:47] Connected on port 8094
+[13.10.24 13:02:01] INFO [socket-wrapper.__exit__:52] Released port 8094
+[13.10.24 13:02:01] INFO [socket-wrapper.__enter__:47] Connected on port 8093
+[13.10.24 13:02:01] INFO [socket-wrapper.__exit__:52] Released port 8093
+[13.10.24 13:02:01] INFO [socket-wrapper.__enter__:47] Connected on port 8094
+[13.10.24 13:02:01] INFO [socket-wrapper.__exit__:52] Released port 8094
+[13.10.24 13:02:01] INFO [socket-wrapper.__enter__:47] Connected on port 8093
+[13.10.24 13:02:01] INFO [socket-wrapper.__exit__:52] Released port 8093
+[13.10.24 13:02:01] INFO [socket-wrapper.__enter__:47] Connected on port 8094
+[13.10.24 13:02:01] INFO [socket-wrapper.__exit__:52] Released port 8094
+[13.10.24 13:02:01] DEBUG [peewee.execute_sql:3319] ('INSERT INTO "run" ("task_id", "solution_source", "solution_hash", "verdict", "comment", "invoker_port", "invoker_id", "submission_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?)', ['unique', 'def unique(a):\n  x = 1\n  b = []\n  for i in a:\n    if i not in b:\n      b.append(i)\n  return(b)', '-7013771607107647445', 'OK', None, None, None, 239])
+[13.10.24 13:02:01] DEBUG [aiogram.utils.chat_action._worker:98] Finished chat action 'typing' sender in chat_id=265837243 via bot id=6377300361
+[13.10.24 13:02:03] DEBUG [root.__call__:92] Event: {
+  "update_id": 802862028,
+  "message": {
+    "message_id": 3442,
+    "chat": {
+      "id": 265837243,
+      "type": "private",
+      "username": "doreshnikov"
+    },
+    "from_user": {
+      "id": 265837243,
+      "username": "doreshnikov"
+    },
+    "text": "/grade"
+  }
+}
+[13.10.24 13:02:03] DEBUG [root.__call__:97] State: None
+[13.10.24 13:02:03] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."id_", "t1"."name", "t1"."speciality", "t1"."group" FROM "student" AS "t1" INNER JOIN "tg_user" AS "t2" ON ("t2"."student_id" = "t1"."id_") WHERE ("t2"."tg_id" = ?) LIMIT ?', [265837243, 1])
+[13.10.24 13:02:03] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."student_id", "t1"."tg_id", "t1"."username" FROM "tg_user" AS "t1" WHERE ("t1"."student_id" = ?) LIMIT ?', [0, 1])
+[13.10.24 13:02:04] INFO [aiogram.event.feed_update:172] Update id=802862028 is handled. Duration 83 ms by bot id=6377300361
+[13.10.24 13:02:05] DEBUG [root.__call__:92] Event: {
+  "update_id": 802862029,
+  "callback_query": {
+    "id": "1141762268925923728",
+    "from_user": {
+      "id": 265837243,
+      "username": "doreshnikov"
+    },
+    "chat_instance": "5810223480658792996",
+    "data": "event:00-introduction"
+  }
+}
+[13.10.24 13:02:05] DEBUG [root.__call__:97] State: GradeState:EVENT_SELECT
+[13.10.24 13:02:05] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."id_", "t1"."name", "t1"."speciality", "t1"."group" FROM "student" AS "t1" INNER JOIN "tg_user" AS "t2" ON ("t2"."student_id" = "t1"."id_") WHERE ("t2"."tg_id" = ?) LIMIT ?', [265837243, 1])
+[13.10.24 13:02:05] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."student_id", "t1"."tg_id", "t1"."username" FROM "tg_user" AS "t1" WHERE ("t1"."student_id" = ?) LIMIT ?', [0, 1])
+[13.10.24 13:02:05] INFO [aiogram.event.feed_update:172] Update id=802862029 is handled. Duration 109 ms by bot id=6377300361
+[13.10.24 13:02:06] DEBUG [root.__call__:92] Event: {
+  "update_id": 802862030,
+  "callback_query": {
+    "id": "1141762267640859175",
+    "from_user": {
+      "id": 265837243,
+      "username": "doreshnikov"
+    },
+    "chat_instance": "5810223480658792996",
+    "data": "format:text"
+  }
+}
+[13.10.24 13:02:06] DEBUG [root.__call__:97] State: GradeState:FORMAT_SELECT
+[13.10.24 13:02:06] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."id_", "t1"."name", "t1"."speciality", "t1"."group" FROM "student" AS "t1" INNER JOIN "tg_user" AS "t2" ON ("t2"."student_id" = "t1"."id_") WHERE ("t2"."tg_id" = ?) LIMIT ?', [265837243, 1])
+[13.10.24 13:02:06] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."student_id", "t1"."tg_id", "t1"."username" FROM "tg_user" AS "t1" WHERE ("t1"."student_id" = ?) LIMIT ?', [0, 1])
+[13.10.24 13:02:07] INFO [aiogram.event.feed_update:172] Update id=802862030 is handled. Duration 173 ms by bot id=6377300361
+[13.10.24 13:02:20] DEBUG [root.__call__:92] Event: {
+  "update_id": 802862031,
+  "message": {
+    "message_id": 3444,
+    "chat": {
+      "id": 265837243,
+      "type": "private",
+      "username": "doreshnikov"
+    },
+    "from_user": {
+      "id": 265837243,
+      "username": "doreshnikov"
+    },
+    "text": "def whoami():\n  print('Еремеева Елизавета')\n\ndef unique(a):\n  x = 11\n  b = []\n  for i in a:\n    if i not in b:\n      b.append(i)\n  return(b)"
+  }
+}
+[13.10.24 13:02:20] DEBUG [root.__call__:97] State: GradeState:CODE
+[13.10.24 13:02:20] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."id_", "t1"."name", "t1"."speciality", "t1"."group" FROM "student" AS "t1" INNER JOIN "tg_user" AS "t2" ON ("t2"."student_id" = "t1"."id_") WHERE ("t2"."tg_id" = ?) LIMIT ?', [265837243, 1])
+[13.10.24 13:02:20] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."student_id", "t1"."tg_id", "t1"."username" FROM "tg_user" AS "t1" WHERE ("t1"."student_id" = ?) LIMIT ?', [0, 1])
+[13.10.24 13:02:20] DEBUG [peewee.execute_sql:3319] ('INSERT INTO "submission" ("timestamp", "event", "file_path", "message_id", "student_id") VALUES (?, ?, ?, ?, ?)', [1728813741, '00-introduction', None, 3445, 0])
+[13.10.24 13:02:20] INFO [aiogram.event.feed_update:172] Update id=802862031 is handled. Duration 76 ms by bot id=6377300361
+[13.10.24 13:02:20] DEBUG [aiogram.utils.chat_action._worker:70] Started chat action 'typing' sender in chat_id=265837243 via bot id=6377300361
+[13.10.24 13:02:20] INFO [socket-wrapper.__enter__:47] Connected on port 8093
+[13.10.24 13:02:20] INFO [socket-wrapper.__exit__:52] Released port 8093
+[13.10.24 13:02:20] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."id_", "t1"."name", "t1"."speciality", "t1"."group" FROM "student" AS "t1" WHERE ("t1"."id_" = ?) LIMIT ?', [0, 1])
+[13.10.24 13:02:20] DEBUG [peewee.execute_sql:3319] ('INSERT INTO "run" ("task_id", "solution_source", "solution_hash", "verdict", "comment", "invoker_port", "invoker_id", "submission_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?)', ['whoami', "def whoami():\n  print('Еремеева Елизавета')", '8791462947495511859', 'WA', "[test 1] result 'Еремеева Елизавета\n' is not your name", 8093, '898f3168db756bc287105efe7058db5317fac9654679f08b9e7fd84930fb4557', 240])
+[13.10.24 13:02:20] DEBUG [aiogram.utils.chat_action._worker:81] Sent chat action 'typing' to chat_id=265837243 via bot 6377300361 (already sent actions 0)
+[13.10.24 13:02:20] INFO [socket-wrapper.__enter__:47] Connected on port 8094
+[13.10.24 13:02:20] INFO [socket-wrapper.__exit__:52] Released port 8094
+[13.10.24 13:02:20] INFO [socket-wrapper.__enter__:47] Connected on port 8093
+[13.10.24 13:02:20] INFO [socket-wrapper.__exit__:52] Released port 8093
+[13.10.24 13:02:20] INFO [socket-wrapper.__enter__:47] Connected on port 8094
+[13.10.24 13:02:20] INFO [socket-wrapper.__exit__:52] Released port 8094
+[13.10.24 13:02:20] INFO [socket-wrapper.__enter__:47] Connected on port 8093
+[13.10.24 13:02:20] INFO [socket-wrapper.__exit__:52] Released port 8093
+[13.10.24 13:02:20] INFO [socket-wrapper.__enter__:47] Connected on port 8094
+[13.10.24 13:02:20] INFO [socket-wrapper.__exit__:52] Released port 8094
+[13.10.24 13:02:20] INFO [socket-wrapper.__enter__:47] Connected on port 8093
+[13.10.24 13:02:20] INFO [socket-wrapper.__exit__:52] Released port 8093
+[13.10.24 13:02:20] INFO [socket-wrapper.__enter__:47] Connected on port 8094
+[13.10.24 13:02:20] INFO [socket-wrapper.__exit__:52] Released port 8094
+[13.10.24 13:02:20] DEBUG [peewee.execute_sql:3319] ('INSERT INTO "run" ("task_id", "solution_source", "solution_hash", "verdict", "comment", "invoker_port", "invoker_id", "submission_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?)', ['unique', 'def unique(a):\n  x = 11\n  b = []\n  for i in a:\n    if i not in b:\n      b.append(i)\n  return(b)', '6834146056688552876', 'OK', None, None, None, 240])
+[13.10.24 13:02:20] DEBUG [aiogram.utils.chat_action._worker:98] Finished chat action 'typing' sender in chat_id=265837243 via bot id=6377300361
+[13.10.24 13:02:22] DEBUG [root.__call__:92] Event: {
+  "update_id": 802862032,
+  "message": {
+    "message_id": 3446,
+    "chat": {
+      "id": 265837243,
+      "type": "private",
+      "username": "doreshnikov"
+    },
+    "from_user": {
+      "id": 265837243,
+      "username": "doreshnikov"
+    },
+    "text": "/gra"
+  }
+}
+[13.10.24 13:02:22] DEBUG [root.__call__:97] State: None
+[13.10.24 13:02:22] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."id_", "t1"."name", "t1"."speciality", "t1"."group" FROM "student" AS "t1" INNER JOIN "tg_user" AS "t2" ON ("t2"."student_id" = "t1"."id_") WHERE ("t2"."tg_id" = ?) LIMIT ?', [265837243, 1])
+[13.10.24 13:02:22] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."student_id", "t1"."tg_id", "t1"."username" FROM "tg_user" AS "t1" WHERE ("t1"."student_id" = ?) LIMIT ?', [0, 1])
+[13.10.24 13:02:22] INFO [aiogram.event.feed_update:172] Update id=802862032 is not handled. Duration 5 ms by bot id=6377300361
+[13.10.24 13:02:25] DEBUG [root.__call__:92] Event: {
+  "update_id": 802862033,
+  "message": {
+    "message_id": 3447,
+    "chat": {
+      "id": 265837243,
+      "type": "private",
+      "username": "doreshnikov"
+    },
+    "from_user": {
+      "id": 265837243,
+      "username": "doreshnikov"
+    },
+    "text": "/grade"
+  }
+}
+[13.10.24 13:02:25] DEBUG [root.__call__:97] State: None
+[13.10.24 13:02:25] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."id_", "t1"."name", "t1"."speciality", "t1"."group" FROM "student" AS "t1" INNER JOIN "tg_user" AS "t2" ON ("t2"."student_id" = "t1"."id_") WHERE ("t2"."tg_id" = ?) LIMIT ?', [265837243, 1])
+[13.10.24 13:02:25] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."student_id", "t1"."tg_id", "t1"."username" FROM "tg_user" AS "t1" WHERE ("t1"."student_id" = ?) LIMIT ?', [0, 1])
+[13.10.24 13:02:25] INFO [aiogram.event.feed_update:172] Update id=802862033 is handled. Duration 206 ms by bot id=6377300361
+[13.10.24 13:02:26] DEBUG [root.__call__:92] Event: {
+  "update_id": 802862034,
+  "callback_query": {
+    "id": "1141762266505953288",
+    "from_user": {
+      "id": 265837243,
+      "username": "doreshnikov"
+    },
+    "chat_instance": "5810223480658792996",
+    "data": "event:00-introduction"
+  }
+}
+[13.10.24 13:02:26] DEBUG [root.__call__:97] State: GradeState:EVENT_SELECT
+[13.10.24 13:02:26] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."id_", "t1"."name", "t1"."speciality", "t1"."group" FROM "student" AS "t1" INNER JOIN "tg_user" AS "t2" ON ("t2"."student_id" = "t1"."id_") WHERE ("t2"."tg_id" = ?) LIMIT ?', [265837243, 1])
+[13.10.24 13:02:26] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."student_id", "t1"."tg_id", "t1"."username" FROM "tg_user" AS "t1" WHERE ("t1"."student_id" = ?) LIMIT ?', [0, 1])
+[13.10.24 13:02:26] INFO [aiogram.event.feed_update:172] Update id=802862034 is handled. Duration 118 ms by bot id=6377300361
+[13.10.24 13:02:27] DEBUG [root.__call__:92] Event: {
+  "update_id": 802862035,
+  "callback_query": {
+    "id": "1141762268311288912",
+    "from_user": {
+      "id": 265837243,
+      "username": "doreshnikov"
+    },
+    "chat_instance": "5810223480658792996",
+    "data": "format:text"
+  }
+}
+[13.10.24 13:02:27] DEBUG [root.__call__:97] State: GradeState:FORMAT_SELECT
+[13.10.24 13:02:27] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."id_", "t1"."name", "t1"."speciality", "t1"."group" FROM "student" AS "t1" INNER JOIN "tg_user" AS "t2" ON ("t2"."student_id" = "t1"."id_") WHERE ("t2"."tg_id" = ?) LIMIT ?', [265837243, 1])
+[13.10.24 13:02:27] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."student_id", "t1"."tg_id", "t1"."username" FROM "tg_user" AS "t1" WHERE ("t1"."student_id" = ?) LIMIT ?', [0, 1])
+[13.10.24 13:02:27] INFO [aiogram.event.feed_update:172] Update id=802862035 is handled. Duration 111 ms by bot id=6377300361
+[13.10.24 13:02:49] DEBUG [root.__call__:92] Event: {
+  "update_id": 802862036,
+  "message": {
+    "message_id": 3449,
+    "chat": {
+      "id": 265837243,
+      "type": "private",
+      "username": "doreshnikov"
+    },
+    "from_user": {
+      "id": 265837243,
+      "username": "doreshnikov"
+    },
+    "text": "def whoami():\n  print('Еремеева Елизавета')\n\ndef unique(a):\n  x = 12178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587\n  b = []\n  for i in a:\n    if i not in b:\n      b.append(i)\n  return(b)"
+  }
+}
+[13.10.24 13:02:49] DEBUG [root.__call__:97] State: GradeState:CODE
+[13.10.24 13:02:49] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."id_", "t1"."name", "t1"."speciality", "t1"."group" FROM "student" AS "t1" INNER JOIN "tg_user" AS "t2" ON ("t2"."student_id" = "t1"."id_") WHERE ("t2"."tg_id" = ?) LIMIT ?', [265837243, 1])
+[13.10.24 13:02:49] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."student_id", "t1"."tg_id", "t1"."username" FROM "tg_user" AS "t1" WHERE ("t1"."student_id" = ?) LIMIT ?', [0, 1])
+[13.10.24 13:02:49] DEBUG [peewee.execute_sql:3319] ('INSERT INTO "submission" ("timestamp", "event", "file_path", "message_id", "student_id") VALUES (?, ?, ?, ?, ?)', [1728813769, '00-introduction', None, 3450, 0])
+[13.10.24 13:02:49] INFO [aiogram.event.feed_update:172] Update id=802862036 is handled. Duration 183 ms by bot id=6377300361
+[13.10.24 13:02:49] DEBUG [aiogram.utils.chat_action._worker:70] Started chat action 'typing' sender in chat_id=265837243 via bot id=6377300361
+[13.10.24 13:02:49] INFO [socket-wrapper.__enter__:47] Connected on port 8093
+[13.10.24 13:02:49] INFO [socket-wrapper.__exit__:52] Released port 8093
+[13.10.24 13:02:49] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."id_", "t1"."name", "t1"."speciality", "t1"."group" FROM "student" AS "t1" WHERE ("t1"."id_" = ?) LIMIT ?', [0, 1])
+[13.10.24 13:02:49] DEBUG [peewee.execute_sql:3319] ('INSERT INTO "run" ("task_id", "solution_source", "solution_hash", "verdict", "comment", "invoker_port", "invoker_id", "submission_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?)', ['whoami', "def whoami():\n  print('Еремеева Елизавета')", '8791462947495511859', 'WA', "[test 1] result 'Еремеева Елизавета\n' is not your name", 8093, '898f3168db756bc287105efe7058db5317fac9654679f08b9e7fd84930fb4557', 241])
+[13.10.24 13:02:49] DEBUG [aiogram.utils.chat_action._worker:81] Sent chat action 'typing' to chat_id=265837243 via bot 6377300361 (already sent actions 0)
+[13.10.24 13:02:49] INFO [socket-wrapper.__enter__:47] Connected on port 8094
+[13.10.24 13:02:49] INFO [socket-wrapper.__exit__:52] Released port 8094
+[13.10.24 13:02:49] INFO [socket-wrapper.__enter__:47] Connected on port 8093
+[13.10.24 13:02:49] INFO [socket-wrapper.__exit__:52] Released port 8093
+[13.10.24 13:02:49] INFO [socket-wrapper.__enter__:47] Connected on port 8094
+[13.10.24 13:02:49] INFO [socket-wrapper.__exit__:52] Released port 8094
+[13.10.24 13:02:49] INFO [socket-wrapper.__enter__:47] Connected on port 8093
+[13.10.24 13:02:49] INFO [socket-wrapper.__exit__:52] Released port 8093
+[13.10.24 13:02:49] INFO [socket-wrapper.__enter__:47] Connected on port 8094
+[13.10.24 13:02:49] INFO [socket-wrapper.__exit__:52] Released port 8094
+[13.10.24 13:02:49] INFO [socket-wrapper.__enter__:47] Connected on port 8093
+[13.10.24 13:02:49] INFO [socket-wrapper.__exit__:52] Released port 8093
+[13.10.24 13:02:49] INFO [socket-wrapper.__enter__:47] Connected on port 8094
+[13.10.24 13:02:49] INFO [socket-wrapper.__exit__:52] Released port 8094
+[13.10.24 13:02:49] DEBUG [peewee.execute_sql:3319] ('INSERT INTO "run" ("task_id", "solution_source", "solution_hash", "verdict", "comment", "invoker_port", "invoker_id", "submission_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?)', ['unique', 'def unique(a):\n  x = 12178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587\n  b = []\n  for i in a:\n    if i not in b:\n      b.append(i)\n  return(b)', '-4828432440400504023', 'OK', None, None, None, 241])
+[13.10.24 13:02:49] DEBUG [aiogram.utils.chat_action._worker:98] Finished chat action 'typing' sender in chat_id=265837243 via bot id=6377300361
+[13.10.24 13:02:56] DEBUG [root.__call__:92] Event: {
+  "update_id": 802862037,
+  "message": {
+    "message_id": 3451,
+    "chat": {
+      "id": 265837243,
+      "type": "private",
+      "username": "doreshnikov"
+    },
+    "from_user": {
+      "id": 265837243,
+      "username": "doreshnikov"
+    },
+    "text": "/grade"
+  }
+}
+[13.10.24 13:02:56] DEBUG [root.__call__:97] State: None
+[13.10.24 13:02:56] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."id_", "t1"."name", "t1"."speciality", "t1"."group" FROM "student" AS "t1" INNER JOIN "tg_user" AS "t2" ON ("t2"."student_id" = "t1"."id_") WHERE ("t2"."tg_id" = ?) LIMIT ?', [265837243, 1])
+[13.10.24 13:02:56] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."student_id", "t1"."tg_id", "t1"."username" FROM "tg_user" AS "t1" WHERE ("t1"."student_id" = ?) LIMIT ?', [0, 1])
+[13.10.24 13:02:56] INFO [aiogram.event.feed_update:172] Update id=802862037 is handled. Duration 80 ms by bot id=6377300361
+[13.10.24 13:02:57] DEBUG [root.__call__:92] Event: {
+  "update_id": 802862038,
+  "callback_query": {
+    "id": "1141762268307940792",
+    "from_user": {
+      "id": 265837243,
+      "username": "doreshnikov"
+    },
+    "chat_instance": "5810223480658792996",
+    "data": "event:00-introduction"
+  }
+}
+[13.10.24 13:02:57] DEBUG [root.__call__:97] State: GradeState:EVENT_SELECT
+[13.10.24 13:02:57] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."id_", "t1"."name", "t1"."speciality", "t1"."group" FROM "student" AS "t1" INNER JOIN "tg_user" AS "t2" ON ("t2"."student_id" = "t1"."id_") WHERE ("t2"."tg_id" = ?) LIMIT ?', [265837243, 1])
+[13.10.24 13:02:57] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."student_id", "t1"."tg_id", "t1"."username" FROM "tg_user" AS "t1" WHERE ("t1"."student_id" = ?) LIMIT ?', [0, 1])
+[13.10.24 13:02:57] INFO [aiogram.event.feed_update:172] Update id=802862038 is handled. Duration 237 ms by bot id=6377300361
+[13.10.24 13:02:58] DEBUG [root.__call__:92] Event: {
+  "update_id": 802862039,
+  "callback_query": {
+    "id": "1141762267081432063",
+    "from_user": {
+      "id": 265837243,
+      "username": "doreshnikov"
+    },
+    "chat_instance": "5810223480658792996",
+    "data": "format:text"
+  }
+}
+[13.10.24 13:02:58] DEBUG [root.__call__:97] State: GradeState:FORMAT_SELECT
+[13.10.24 13:02:58] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."id_", "t1"."name", "t1"."speciality", "t1"."group" FROM "student" AS "t1" INNER JOIN "tg_user" AS "t2" ON ("t2"."student_id" = "t1"."id_") WHERE ("t2"."tg_id" = ?) LIMIT ?', [265837243, 1])
+[13.10.24 13:02:58] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."student_id", "t1"."tg_id", "t1"."username" FROM "tg_user" AS "t1" WHERE ("t1"."student_id" = ?) LIMIT ?', [0, 1])
+[13.10.24 13:02:58] INFO [aiogram.event.feed_update:172] Update id=802862039 is handled. Duration 213 ms by bot id=6377300361
+[13.10.24 13:03:11] DEBUG [root.__call__:92] Event: {
+  "update_id": 802862040,
+  "message": {
+    "message_id": 3453,
+    "chat": {
+      "id": 265837243,
+      "type": "private",
+      "username": "doreshnikov"
+    },
+    "from_user": {
+      "id": 265837243,
+      "username": "doreshnikov"
+    },
+    "text": "def whoami():\n  print('Еремеева Елизавета')"
+  }
+}
+[13.10.24 13:03:11] DEBUG [root.__call__:97] State: GradeState:CODE
+[13.10.24 13:03:11] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."id_", "t1"."name", "t1"."speciality", "t1"."group" FROM "student" AS "t1" INNER JOIN "tg_user" AS "t2" ON ("t2"."student_id" = "t1"."id_") WHERE ("t2"."tg_id" = ?) LIMIT ?', [265837243, 1])
+[13.10.24 13:03:11] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."student_id", "t1"."tg_id", "t1"."username" FROM "tg_user" AS "t1" WHERE ("t1"."student_id" = ?) LIMIT ?', [0, 1])
+[13.10.24 13:03:11] DEBUG [root.__call__:92] Event: {
+  "update_id": 802862041,
+  "message": {
+    "message_id": 3454,
+    "chat": {
+      "id": 265837243,
+      "type": "private",
+      "username": "doreshnikov"
+    },
+    "from_user": {
+      "id": 265837243,
+      "username": "doreshnikov"
+    },
+    "text": "def unique(a):"
+  }
+}
+[13.10.24 13:03:11] DEBUG [root.__call__:97] State: GradeState:CODE
+[13.10.24 13:03:11] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."id_", "t1"."name", "t1"."speciality", "t1"."group" FROM "student" AS "t1" INNER JOIN "tg_user" AS "t2" ON ("t2"."student_id" = "t1"."id_") WHERE ("t2"."tg_id" = ?) LIMIT ?', [265837243, 1])
+[13.10.24 13:03:11] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."student_id", "t1"."tg_id", "t1"."username" FROM "tg_user" AS "t1" WHERE ("t1"."student_id" = ?) LIMIT ?', [0, 1])
+[13.10.24 13:03:11] DEBUG [peewee.execute_sql:3319] ('INSERT INTO "submission" ("timestamp", "event", "file_path", "message_id", "student_id") VALUES (?, ?, ?, ?, ?)', [1728813791, '00-introduction', None, 3456, 0])
+[13.10.24 13:03:11] INFO [aiogram.event.feed_update:172] Update id=802862040 is handled. Duration 74 ms by bot id=6377300361
+[13.10.24 13:03:11] DEBUG [aiogram.utils.chat_action._worker:70] Started chat action 'typing' sender in chat_id=265837243 via bot id=6377300361
+[13.10.24 13:03:11] INFO [socket-wrapper.__enter__:47] Connected on port 8093
+[13.10.24 13:03:11] INFO [socket-wrapper.__exit__:52] Released port 8093
+[13.10.24 13:03:11] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."id_", "t1"."name", "t1"."speciality", "t1"."group" FROM "student" AS "t1" WHERE ("t1"."id_" = ?) LIMIT ?', [0, 1])
+[13.10.24 13:03:11] DEBUG [peewee.execute_sql:3319] ('INSERT INTO "run" ("task_id", "solution_source", "solution_hash", "verdict", "comment", "invoker_port", "invoker_id", "submission_id") VALUES (?, ?, ?, ?, ?, ?, ?, ?)', ['whoami', "def whoami():\n  print('Еремеева Елизавета')", '8791462947495511859', 'WA', "[test 1] result 'Еремеева Елизавета\n' is not your name", 8093, '898f3168db756bc287105efe7058db5317fac9654679f08b9e7fd84930fb4557', 242])
+[13.10.24 13:03:11] DEBUG [aiogram.utils.chat_action._worker:81] Sent chat action 'typing' to chat_id=265837243 via bot 6377300361 (already sent actions 0)
+[13.10.24 13:03:11] DEBUG [root.__call__:92] Event: {
+  "update_id": 802862042,
+  "message": {
+    "message_id": 3455,
+    "chat": {
+      "id": 265837243,
+      "type": "private",
+      "username": "doreshnikov"
+    },
+    "from_user": {
+      "id": 265837243,
+      "username": "doreshnikov"
+    },
+    "text": "x ="
+  }
+}
+[13.10.24 13:03:11] DEBUG [root.__call__:97] State: GradeState:TESTING
+[13.10.24 13:03:11] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."id_", "t1"."name", "t1"."speciality", "t1"."group" FROM "student" AS "t1" INNER JOIN "tg_user" AS "t2" ON ("t2"."student_id" = "t1"."id_") WHERE ("t2"."tg_id" = ?) LIMIT ?', [265837243, 1])
+[13.10.24 13:03:11] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."student_id", "t1"."tg_id", "t1"."username" FROM "tg_user" AS "t1" WHERE ("t1"."student_id" = ?) LIMIT ?', [0, 1])
+[13.10.24 13:03:11] DEBUG [root.__call__:92] Event: {
+  "update_id": 802862043,
+  "message": {
+    "message_id": 3457,
+    "chat": {
+      "id": 265837243,
+      "type": "private",
+      "username": "doreshnikov"
+    },
+    "from_user": {
+      "id": 265837243,
+      "username": "doreshnikov"
+    },
+    "text": "1217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587"
+  }
+}
+[13.10.24 13:03:11] DEBUG [root.__call__:97] State: GradeState:TESTING
+[13.10.24 13:03:11] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."id_", "t1"."name", "t1"."speciality", "t1"."group" FROM "student" AS "t1" INNER JOIN "tg_user" AS "t2" ON ("t2"."student_id" = "t1"."id_") WHERE ("t2"."tg_id" = ?) LIMIT ?', [265837243, 1])
+[13.10.24 13:03:11] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."student_id", "t1"."tg_id", "t1"."username" FROM "tg_user" AS "t1" WHERE ("t1"."student_id" = ?) LIMIT ?', [0, 1])
+[13.10.24 13:03:11] INFO [aiogram.event.feed_update:172] Update id=802862042 is not handled. Duration 10 ms by bot id=6377300361
+[13.10.24 13:03:11] INFO [aiogram.event.feed_update:172] Update id=802862043 is not handled. Duration 5 ms by bot id=6377300361
+[13.10.24 13:03:11] DEBUG [root.__call__:92] Event: {
+  "update_id": 802862044,
+  "message": {
+    "message_id": 3458,
+    "chat": {
+      "id": 265837243,
+      "type": "private",
+      "username": "doreshnikov"
+    },
+    "from_user": {
+      "id": 265837243,
+      "username": "doreshnikov"
+    },
+    "text": "1217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587"
+  }
+}
+[13.10.24 13:03:11] DEBUG [root.__call__:97] State: GradeState:TESTING
+[13.10.24 13:03:11] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."id_", "t1"."name", "t1"."speciality", "t1"."group" FROM "student" AS "t1" INNER JOIN "tg_user" AS "t2" ON ("t2"."student_id" = "t1"."id_") WHERE ("t2"."tg_id" = ?) LIMIT ?', [265837243, 1])
+[13.10.24 13:03:11] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."student_id", "t1"."tg_id", "t1"."username" FROM "tg_user" AS "t1" WHERE ("t1"."student_id" = ?) LIMIT ?', [0, 1])
+[13.10.24 13:03:11] INFO [aiogram.event.feed_update:172] Update id=802862044 is not handled. Duration 8 ms by bot id=6377300361
+[13.10.24 13:03:11] DEBUG [root.__call__:92] Event: {
+  "update_id": 802862045,
+  "message": {
+    "message_id": 3459,
+    "chat": {
+      "id": 265837243,
+      "type": "private",
+      "username": "doreshnikov"
+    },
+    "from_user": {
+      "id": 265837243,
+      "username": "doreshnikov"
+    },
+    "text": "1217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587"
+  }
+}
+[13.10.24 13:03:11] DEBUG [root.__call__:97] State: GradeState:TESTING
+[13.10.24 13:03:11] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."id_", "t1"."name", "t1"."speciality", "t1"."group" FROM "student" AS "t1" INNER JOIN "tg_user" AS "t2" ON ("t2"."student_id" = "t1"."id_") WHERE ("t2"."tg_id" = ?) LIMIT ?', [265837243, 1])
+[13.10.24 13:03:11] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."student_id", "t1"."tg_id", "t1"."username" FROM "tg_user" AS "t1" WHERE ("t1"."student_id" = ?) LIMIT ?', [0, 1])
+[13.10.24 13:03:11] DEBUG [root.__call__:92] Event: {
+  "update_id": 802862046,
+  "message": {
+    "message_id": 3460,
+    "chat": {
+      "id": 265837243,
+      "type": "private",
+      "username": "doreshnikov"
+    },
+    "from_user": {
+      "id": 265837243,
+      "username": "doreshnikov"
+    },
+    "text": "1217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587"
+  }
+}
+[13.10.24 13:03:11] DEBUG [root.__call__:97] State: GradeState:TESTING
+[13.10.24 13:03:11] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."id_", "t1"."name", "t1"."speciality", "t1"."group" FROM "student" AS "t1" INNER JOIN "tg_user" AS "t2" ON ("t2"."student_id" = "t1"."id_") WHERE ("t2"."tg_id" = ?) LIMIT ?', [265837243, 1])
+[13.10.24 13:03:11] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."student_id", "t1"."tg_id", "t1"."username" FROM "tg_user" AS "t1" WHERE ("t1"."student_id" = ?) LIMIT ?', [0, 1])
+[13.10.24 13:03:11] INFO [aiogram.event.feed_update:172] Update id=802862045 is not handled. Duration 13 ms by bot id=6377300361
+[13.10.24 13:03:11] INFO [aiogram.event.feed_update:172] Update id=802862046 is not handled. Duration 9 ms by bot id=6377300361
+[13.10.24 13:03:11] DEBUG [peewee.execute_sql:3319] ('INSERT INTO "submission" ("timestamp", "event", "file_path", "message_id", "student_id") VALUES (?, ?, ?, ?, ?)', [1728813791, '00-introduction', None, 3462, 0])
+[13.10.24 13:03:11] INFO [aiogram.event.feed_update:172] Update id=802862041 is handled. Duration 162 ms by bot id=6377300361
+[13.10.24 13:03:11] DEBUG [aiogram.utils.chat_action._worker:70] Started chat action 'typing' sender in chat_id=265837243 via bot id=6377300361
+[13.10.24 13:03:11] DEBUG [aiogram.utils.chat_action._worker:81] Sent chat action 'typing' to chat_id=265837243 via bot 6377300361 (already sent actions 0)
+[13.10.24 13:03:11] DEBUG [root.__call__:92] Event: {
+  "update_id": 802862047,
+  "message": {
+    "message_id": 3461,
+    "chat": {
+      "id": 265837243,
+      "type": "private",
+      "username": "doreshnikov"
+    },
+    "from_user": {
+      "id": 265837243,
+      "username": "doreshnikov"
+    },
+    "text": "121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587121786278915675261747218454712537612576351726537614515646328968742364763257867832658962387568237657864376384653874648687638465871217862789156752617472184547125376125763517265376145156463289687423647632578678326589623875682376578643763846538746486876384658712178627891567526174721845471253761257635172653761451564632896874236476325786783265896238756823765786437638465387464868763846587\n  b = []\n  for i in a:\n    if i not in b:\n      b.append(i)\n  return(b)"
+  }
+}
+[13.10.24 13:03:11] DEBUG [root.__call__:97] State: GradeState:TESTING
+[13.10.24 13:03:11] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."id_", "t1"."name", "t1"."speciality", "t1"."group" FROM "student" AS "t1" INNER JOIN "tg_user" AS "t2" ON ("t2"."student_id" = "t1"."id_") WHERE ("t2"."tg_id" = ?) LIMIT ?', [265837243, 1])
+[13.10.24 13:03:11] DEBUG [peewee.execute_sql:3319] ('SELECT "t1"."student_id", "t1"."tg_id", "t1"."username" FROM "tg_user" AS "t1" WHERE ("t1"."student_id" = ?) LIMIT ?', [0, 1])
+[13.10.24 13:03:11] INFO [aiogram.event.feed_update:172] Update id=802862047 is not handled. Duration 6 ms by bot id=6377300361
+[13.10.24 13:03:11] DEBUG [aiogram.utils.chat_action._worker:98] Finished chat action 'typing' sender in chat_id=265837243 via bot id=6377300361
+[13.10.24 13:03:11] DEBUG [aiogram.utils.chat_action._worker:98] Finished chat action 'typing' sender in chat_id=265837243 via bot id=6377300361
+[13.10.24 13:50:19] WARNING [aiogram.dispatcher._signal_stop_polling:455] Received SIGINT signal
+[13.10.24 13:50:19] INFO [aiogram.dispatcher._polling:359] Polling stopped for bot @testing_dummy_bot id=6377300361 - 'Testing Dummy'
+[13.10.24 13:50:19] INFO [aiogram.dispatcher.start_polling:554] Polling stopped

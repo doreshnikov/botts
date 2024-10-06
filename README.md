@@ -29,7 +29,7 @@ python -m pip install -r requirements.txt
 
 1. Сделайте себе тестового бота в тг (обратитесь к [@BotFather](https://t.me/BotFather))
 2. Положите в корне проекта файл `config.toml` (не спрашивайте, почему toml, у меня проблемы с головой)
-3. Внимательно посмотрите в [config.~toml](config.~toml):
+3. Внимательно посмотрите в [config.example.toml](config.example.toml):
 ```toml
 [sheets]
 course_table_url = '<url to course export table>'

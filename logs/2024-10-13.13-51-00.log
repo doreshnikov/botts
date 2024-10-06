@@ -1,0 +1,6 @@
+[13.10.24 13:51:00] DEBUG [asyncio.__init__:64] Using selector: KqueueSelector
+[13.10.24 13:51:00] INFO [aiogram.dispatcher.start_polling:527] Start polling
+[13.10.24 13:51:00] INFO [aiogram.dispatcher._polling:341] Run polling for bot @testing_dummy_bot id=6377300361 - 'Testing Dummy'
+[13.10.24 13:51:07] WARNING [aiogram.dispatcher._signal_stop_polling:455] Received SIGINT signal
+[13.10.24 13:51:07] INFO [aiogram.dispatcher._polling:359] Polling stopped for bot @testing_dummy_bot id=6377300361 - 'Testing Dummy'
+[13.10.24 13:51:07] INFO [aiogram.dispatcher.start_polling:554] Polling stopped
