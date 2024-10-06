@@ -1,0 +1,7 @@
+[sheets]
+course_table_url = '<url to course export table>' # currently unused
+
+[bot]
+token = '<main bot token>'
+debug_token = '<debug bot token>'
+admin_id = 0 # your telegram id

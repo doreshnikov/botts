@@ -1,7 +1,0 @@
-[sheets]
-course_table_url = '<url to course export table>'
-
-[bot]
-token = '<main bot token>'
-debug_token = '<debug bot token>'
-admin_id = <your id>
