@@ -10,6 +10,7 @@ from typing import Any
 
 import docker
 
+import invoker.interface
 from botts.bot.config.local import report_fail
 from botts.testsys.components.base.units import CodeUnit
 from botts.testsys.components.check.checker import Verdict
@@ -90,16 +91,8 @@ class SocketWrapper(InvokerBase):
 
 class InvokerPool:
     def __init__(self):
-        config_file = Path('./scripts/invokers/invokers.json')
-        if not config_file.exists():
-            startup = Popen(
-                ['python', 'startup.py', '655444:655448', '--rebuild'],
-                cwd='./scripts/invokers'
-            )
-            startup.wait()
-        with open(config_file) as config:
-            self.config = json.load(config)
-            self.config = {int(port): id_ for port, id_ in self.config['remote'].items()}
+        self.docker_client = invoker.interface.Client()
+        self.config = self.docker_client.containers
 
         self.status: dict[int, Status] = {}
         self.queue = Queue()
@@ -107,18 +100,16 @@ class InvokerPool:
             self.status[port] = Status.FREE
             self.queue.put(port)
 
-        self.docker_client = docker.client.from_env()
-
     def acquire(self) -> SocketWrapper:
         port = self.queue.get()
         self.status[port] = Status.BUSY
-        return SocketWrapper(port, self.config[port], self)
+        return SocketWrapper(port, self.config[port].id, self)
 
     def release(self, port: int):
-        cnt = self.docker_client.containers.get(self.config[port])
-        if cnt.status != 'running':
+        container = self.config[port]
+        if container.status != 'running':
             logging.getLogger('invoker-pool').warning(f'Container on port {port} failed')
-            raise FailedContainerException(cnt.logs())
+            raise FailedContainerException(container.logs())
         self.status[port] = Status.FREE
         self.queue.put(port)
 
