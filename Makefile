@@ -15,5 +15,6 @@ icount := 5
 invokers: build
 	docker-compose up --scale invoker=${icount} -d
 
+debug := 0
 run: invokers
-	DEBUG=1 python -m botts.bot.main
+	DEBUG=${debug} python -m botts.bot.main
