@@ -13,6 +13,7 @@ build: update
 
 icount := 5
 invokers: build
+	docker-compose down
 	docker-compose up --scale invoker=${icount} -d
 
 debug := 0

@@ -8,7 +8,7 @@ class Submission(Model):
     id_ = AutoField(primary_key=True)
     timestamp = TimestampField()
     event = CharField()
-    file_path = CharField()
+    file_path = CharField(null=True)
     message_id = IntegerField()
     student = ForeignKeyField(
         Student, backref='submissions', field='id_',

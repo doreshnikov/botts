@@ -1,22 +1,23 @@
+import random
 from datetime import datetime
 from random import Random
 from sys import setrecursionlimit
 from typing import Any
 
-from ...components.base.task import Task
-from ...components.check.checker import EitherOf, SequenceOf, SINGLE_BOOL, SINGLE_NUMBER, \
+from botts.testsys.components.base.task import Task
+from botts.testsys.components.check.checker import EitherOf, SequenceOf, SINGLE_BOOL, SINGLE_NUMBER, \
     SINGLE_STRING
-from ...components.check.generator import ArgList, Arguments, Generator, H, R_INT, R_PERM
-from ...components.check.validator import NO_EVAL, NO_EXEC, NO_IMPORTS, NoNameNode
-from ...components.extract.jupyter import FnLocator
-from ...components.test.event import Event
+from botts.testsys.components.check.generator import ArgList, Arguments, Generator, H, R_INT, R_PERM
+from botts.testsys.components.check.validator import NO_EVAL, NO_EXEC, NO_IMPORTS, NoNameNode
+from botts.testsys.components.extract.jupyter import FnLocator
+from botts.testsys.components.test.event import Event
 
 DEFAULT_VAL = NO_IMPORTS & NO_EXEC & NO_EVAL & NoNameNode('globals')
 
 setrecursionlimit(100000)
 
 
-def cats_and_mice(mapping):
+def cats_and_mice(mapping, moves):
     if mapping.find('C') == -1 or mapping.find('m') == -1:
         return 'We need two animals!'
     lst = mapping.split('\n')
@@ -26,7 +27,9 @@ def cats_and_mice(mapping):
         if 'm' in s:
             k, l = s.find('m'), ind
     h, w = abs(k - i), abs(l - j)
-    return h + w
+    if max(h, w) <= moves:
+        return 'Caught!'
+    return 'Run!'
 
 
 class CatsAndMiceGenerator(Generator):
@@ -45,7 +48,10 @@ class CatsAndMiceGenerator(Generator):
             mapping[i][j] = "m"
 
         return Arguments(
-            args=("\n".join("".join(row) for row in mapping),),
+            args=(
+                "\n".join("".join(row) for row in mapping),
+                random.randint(5, w + h - 2)
+            ),
             kwargs={}
         )
 
@@ -54,45 +60,39 @@ def exchange(lst):
     if not isinstance(lst[0], int) or not isinstance(lst[1], int):
         return 'invalid elements'
     s1, s2 = str(lst[0]), str(lst[1])
-    s = s1 + s2
-    s1, s2 = s[:len(s) // 2], s[len(s) // 2:]
-    return abs(int(s1) - int(s2))
+    return abs(int(s2[-1] + s1[1:]) - int(s2[:-1] + s1[0]))
 
 
 def sorting_cards(cards):
-    lst = ['A', 'J', 'K', 'Q', 'T', '9', '8', '7', '6', '5', '4', '3', '2']
-    cards = cards[:]
+    lst = ['T', 'J', 'Q', 'K', 'A', '2', '3', '4', '5', '6', '7', '8', '9']
     cards.sort(key=lst.index)
     return cards
 
 
 def check_password(s):
-    return 'valid' if (5 <= len(s) <= 15 and
+    return 'valid' if (8 <= len(s) <= 20 and
                        [i for i in s if i.isupper()] and
                        [i for i in s if i.islower()] and
                        [i for i in s if i in '!@#$%^&*?'] and
                        not [i for i in s if not i.isalnum() and i not in '!@#$%^&*?'] and
-                       len([i for i in s if i.isalpha()]) >= 3 and
-                       [i for i in s if i.isdigit()]) \
+                       len([i for i in s if i.isdigit()]) >= 2) \
         else 'not valid'
 
 
 def sorted_people(a):
-    c = [i for i in a if i != -1]
-    b = sorted(c, reverse=len(c) < len(a) - len(c))
+    b = sorted([i for i in a if i != -1], reverse=len(a) % 2 == 1)
     return [x if x == -1 else b.pop() for x in a]
 
 
 def remove_doubles(s):
     s1 = ''
-    s2 = ''
     for i in s:
         if s1 and i == s1[-1]:
             s1 = s1[:-1]
-            s2 += i * 2
+            s1 += i.upper()
         else:
             s1 += i
-    return s1, s2
+    return s1
 
 
 def close_primes(x, y):
@@ -106,43 +106,44 @@ def close_primes(x, y):
             i += 1
         return True
 
+    if not prime(x) or not prime(y):
+        return False
     cnt = 0
-    for i in range(x, y + 1):
+    for i in range(x + 1, y):
         if prime(i):
             cnt += 1
-    return prime(cnt)
+    return cnt
 
 
 def scramble(s, array):
-    lst = ['' for _ in range(len(s))]
-    for i, j in enumerate(array):
-        lst[j] = s[i] if i != j else '■'
-    return ''.join(lst)
+    lst = [s[i] for i in array]
+    lst2 = [lst[i] for i in array]
+    return ''.join(lst2)
 
 
 CONTEST02 = Event(
     'Contest 02',
-    datetime(year=2023, month=12, day=8, hour=17, minute=10, second=0),
+    datetime(year=2023, month=12, day=8, hour=15, minute=26, second=0),
     [
         Task(
             id_='01-cats-and-mice',
             locator=FnLocator('cats_and_mice'),
             include=[],
             validator=DEFAULT_VAL,
-            checker=EitherOf(SINGLE_STRING, SINGLE_NUMBER),
+            checker=SINGLE_STRING,
             tests=[
                 ArgList("""\
             ..C......
             .........
-            ....m...."""),
+            ....m....""", 6),
                 ArgList("""\
             .C.......
             .........
-            ......m.."""),
+            ......m..""", 6),
                 ArgList("""\
             ..C......
             .........
-            ........."""),
+            .........""", 6),
                 *H.repeat_test(
                     R_INT(4, 20).map(
                         lambda x: CatsAndMiceGenerator(x)
@@ -251,7 +252,7 @@ CONTEST02 = Event(
             locator=FnLocator('remove_doubles'),
             include=[],
             validator=DEFAULT_VAL,
-            checker=SequenceOf(SINGLE_STRING, as_type=tuple),
+            checker=SINGLE_STRING,
             tests=[
                 ArgList('zzzzykkkd'),
                 ArgList('abbbzz'),
@@ -281,12 +282,12 @@ CONTEST02 = Event(
             locator=FnLocator('close_primes'),
             include=[],
             validator=DEFAULT_VAL,
-            checker=SINGLE_BOOL,
+            checker=EitherOf(SINGLE_BOOL, SINGLE_NUMBER),
             tests=[
                 ArgList(1, 3),
                 ArgList(17, 19),
-                ArgList(37, 47),
-                ArgList(41, 99),
+                ArgList(37, 43),
+                ArgList(41, 47),
                 ArgList(43, 47),
                 ArgList(2, 3),
                 ArgList(3, 4),
@@ -301,8 +302,8 @@ CONTEST02 = Event(
                 ArgList(25, 25),
                 ArgList(2, 5),
                 ArgList(2, 7),
-                ArgList(3, 7890),
-                ArgList(3, 199),
+                ArgList(3, 7),
+                ArgList(3, 9),
                 ArgList(3, 11)
             ],
             solution=close_primes
@@ -314,8 +315,8 @@ CONTEST02 = Event(
             validator=DEFAULT_VAL,
             checker=SINGLE_STRING,
             tests=[
-                ArgList('abcd', [0, 3, 1, 2]),
-                ArgList('sF351s', [5, 0, 3, 1, 4, 2]),
+                ArgList('abcd', [0, 3, 2, 1]),
+                ArgList('sF351s', [4, 0, 3, 1, 5, 2]),
                 ArgList('bak58', [2, 1, 4, 3, 0]),
                 *H.repeat_test(
                     R_INT(1, 1000).map(
@@ -333,3 +334,11 @@ CONTEST02 = Event(
         )
     ]
 )
+
+if __name__ == '__main__':
+    x = R_INT(7, 21).map(
+        lambda s: R_INT(35, 122).map(chr).repeat(s)
+    ).map(
+        lambda cs: ''.join(cs)
+    )(random.Random())
+    print(x)

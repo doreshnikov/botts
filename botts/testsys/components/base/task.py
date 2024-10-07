@@ -4,6 +4,7 @@ from typing import Any, Callable
 
 from .units import CodeUnit
 from ..check.checker import Checker
+from ..check.executor import Executor
 from ..check.generator import generate, Generator
 from ..check.validator import Validator
 from ..extract.jupyter import Locator
@@ -26,7 +27,7 @@ class Task:
     solution: Callable[[...], Any] | None
     statement: Statement = field(default_factory=Statement)
     time_limit: int = field(default=1)
-    executor: Callable[[...], Any] | None = None
+    executor: Executor | None = None
     extended_info: bool = False
 
     def generate_tests(self, random: Random):

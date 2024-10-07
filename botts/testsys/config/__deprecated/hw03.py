@@ -3,13 +3,13 @@ import math
 from datetime import datetime
 from typing import Any
 
-from ..components.base.include import inc
-from ..components.base.task import Task
-from ..components.check.checker import BYTES, Checker, Result, SINGLE_NUMBER, Verdict
-from ..components.check.generator import ArgList, H, R_INT
-from ..components.check.validator import NO_EVAL, NO_EXEC, NO_IMPORTS
-from ..components.extract.jupyter import FnLocator
-from ..components.test.event import Event
+from botts.testsys.components.base.include import inc
+from botts.testsys.components.base.task import Task
+from botts.testsys.components.check.checker import BYTES, Checker, Result, SINGLE_NUMBER, Verdict
+from botts.testsys.components.check.generator import ArgList, H, R_INT
+from botts.testsys.components.check.validator import NO_EVAL, NO_EXEC, NO_IMPORTS
+from botts.testsys.components.extract.jupyter import FnLocator
+from botts.testsys.components.test.event import Event
 
 
 def substitute_stdout(fn):
@@ -55,8 +55,8 @@ class TreeChecker(Checker):
             rows.pop()
         return rows
 
-    def check(self, _: Any, output: str, answer: str) -> Result:
-        pa = self.cleanup(output)
+    def check(self, _: Any, out_data: str, answer: str) -> Result:
+        pa = self.cleanup(out_data)
         ja = self.cleanup(answer)
         if len(pa) != len(ja):
             return Result(Verdict.WA, f'expected {len(ja)} rows, got {len(pa)}')
@@ -77,9 +77,9 @@ def sequence_element(n: int):
 
 
 class FavouriteNumberChecker(Checker):
-    def check(self, _: Any, output: Any, __: Any) -> Result:
-        if type(output) not in (int, float, complex):
-            return Result(Verdict.WA, f'expected a number, got {type(output)}')
+    def check(self, _: Any, out_data: Any, __: Any) -> Result:
+        if type(out_data) not in (int, float, complex):
+            return Result(Verdict.WA, f'expected a number, got {type(out_data)}')
         return Result(Verdict.OK, None)
 
 
@@ -158,9 +158,9 @@ def json2yaml_executor(fn):
 
 
 class Json2YamlChecker(Checker):
-    def check(self, input_: Any, output: Any, _: Any) -> Result:
-        r1, r2 = output
-        data = input_.args[0]
+    def check(self, in_data: Any, out_data: Any, _: Any) -> Result:
+        r1, r2 = out_data
+        data = in_data.args[0]
         if data != r1:
             return Result(Verdict.WA, f'returned value {r1} doesn\'t match the input {data}')
         if data != r2:
@@ -214,12 +214,12 @@ def compress_executor(fn):
 
 
 class EncodeDecodeChecker(Checker):
-    def check(self, input_: Any, output: Any, answer: Any, **kwargs) -> Result:
-        r_p, sz_p = output
+    def check(self, in_data: Any, out_data: Any, answer: Any, **kwargs) -> Result:
+        r_p, sz_p = out_data
         _, sz_a = answer
-        data, grading = input_.args[0], False
+        data, grading = in_data.args[0], False
         if data == '_GRADING':
-            data, grading = input_.args[1], True
+            data, grading = in_data.args[1], True
         if data != r_p:
             return Result(Verdict.WA, f'result {r_p} doesn\'t match the initial {data}')
         rate = sz_a / sz_p

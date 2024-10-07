@@ -42,14 +42,14 @@ class StringChecker(Checker):
         s = re.sub(r'\.0+$', '', s)
         return s
 
-    def check(self, _: Any, output: Any, answer: str, **__) -> Result:
-        if not isinstance(output, str):
-            return Result(Verdict.IA, f"expected a string, got '{output}'")
+    def check(self, _: Any, out_data: Any, answer: str, **__) -> Result:
+        if not isinstance(out_data, str):
+            return Result(Verdict.IA, f"expected a string, got '{out_data}'")
 
-        output = self.simplify(output)
+        out_data = self.simplify(out_data)
         answer = self.simplify(answer)
-        if output != answer:
-            return Result(Verdict.WA, f"something isn't right in '{output}', expected '{answer}'")
+        if out_data != answer:
+            return Result(Verdict.WA, f"something isn't right in '{out_data}', expected '{answer}'")
         return Result(Verdict.OK, None)
 
 

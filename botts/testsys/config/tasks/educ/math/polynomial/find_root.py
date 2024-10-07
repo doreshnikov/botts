@@ -14,14 +14,14 @@ from .multiply import solution as polynomial_multiply
 
 
 class FindRootChecker(Checker):
-    def check(self, input_: Arguments, output: Any, _: Any, **__) -> Result:
-        if not isinstance(output, numbers.Number):
-            return Result(Verdict.IA, f"expected a number, got '{output}'")
+    def check(self, in_data: Arguments, out_data: Any, _: Any, **__) -> Result:
+        if not isinstance(out_data, numbers.Number):
+            return Result(Verdict.IA, f"expected a number, got '{out_data}'")
 
         # noinspection PyTypeChecker
-        value = polynomial_calculate(*input_.args, output)
+        value = polynomial_calculate(*in_data.args, out_data)
         if abs(value) > 0.0001:
-            return Result(Verdict.WA, f"{output} is not a root: f(x) = {value}")
+            return Result(Verdict.WA, f"{out_data} is not a root: f(x) = {value}")
         return Result(Verdict.OK, None)
 
 
