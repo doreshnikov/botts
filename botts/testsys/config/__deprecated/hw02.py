@@ -3,14 +3,14 @@ import re
 from datetime import datetime
 from typing import Any
 
-from ..components.base.include import inc
-from ..components.base.task import Task
-from ..components.check.checker import Checker, SequenceOf, Result, SINGLE_FLOAT_6, SINGLE_STRING, \
+from botts.testsys.components.base.include import inc
+from botts.testsys.components.base.task import Task
+from botts.testsys.components.check.checker import Checker, SequenceOf, Result, SINGLE_FLOAT_6, SINGLE_STRING, \
     Verdict
-from ..components.check.generator import ArgList, Arguments, H, R_INT, R_FLOAT
-from ..components.check.validator import NO_EVAL, NO_EXEC, NO_IMPORTS, NO_RECURSION, REQ_RECURSION
-from ..components.extract.jupyter import FnLocator
-from ..components.test.event import Event
+from botts.testsys.components.check.generator import ArgList, Arguments, H, R_INT, R_FLOAT
+from botts.testsys.components.check.validator import NO_EVAL, NO_EXEC, NO_IMPORTS, NO_RECURSION, REQ_RECURSION
+from botts.testsys.components.extract.jupyter import FnLocator
+from botts.testsys.components.test.event import Event
 
 
 

@@ -7,7 +7,7 @@ class Student(Model):
     id_ = AutoField(primary_key=True)
     name = CharField(index=True, unique=False)
     speciality = CharField()
-    group = CharField()
+    group = CharField(null=True)
 
     class Meta:
         database = database

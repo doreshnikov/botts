@@ -27,8 +27,18 @@ class Result:
 
 class Checker(ABC):
     @abstractmethod
-    def check(self, input_: Any, output: Any, answer: Any, **kwargs) -> Result:
+    def check(self, in_data: Any, out_data: Any, answer: Any, **kwargs) -> Result:
         pass
+
+
+class _Anything(Checker):
+    def check(self, in_data: Any, out_data: Any, answer: Any, **__) -> Result:
+        if out_data != answer:
+            return Result(Verdict.IA, f"expected '{answer}', got '{out_data}'")
+        return Result(Verdict.OK, None)
+
+
+ANYTHING = _Anything()
 
 
 class Exact(Checker):
@@ -36,11 +46,11 @@ class Exact(Checker):
         self.expected_type = expected_type
         self.type_repr = type_repr
 
-    def check(self, _: Any, output: Any, answer: Any) -> Result:
-        if not isinstance(output, self.expected_type):
-            return Result(Verdict.IA, f"expected a {self.type_repr}, got '{type(output)}'")
-        if output != answer:
-            return Result(Verdict.WA, f"expected '{answer}', got '{output}'")
+    def check(self, _: Any, out_data: Any, answer: Any, **__) -> Result:
+        if not isinstance(out_data, self.expected_type):
+            return Result(Verdict.IA, f"expected a {self.type_repr}, got '{type(out_data)}'")
+        if out_data != answer:
+            return Result(Verdict.WA, f"expected '{answer}', got '{out_data}'")
         return Result(Verdict.OK, None)
 
 
@@ -54,12 +64,12 @@ class CloseNumbers(Checker):
     def __init__(self, delta: float):
         self.delta = delta
 
-    def check(self, _: Any, output: Any, answer: Any) -> Result:
-        if not isinstance(output, numbers.Number):
-            return Result(Verdict.IA, f"expected a number, got '{output}'")
+    def check(self, _: Any, out_data: Any, answer: Any, **__) -> Result:
+        if not isinstance(out_data, numbers.Number):
+            return Result(Verdict.IA, f"expected a number, got '{out_data}'")
         # noinspection PyUnresolvedReferences
-        if abs(output - answer) > self.delta:
-            return Result(Verdict.WA, f"expected '{answer}', got '{output}'")
+        if abs(out_data - answer) > self.delta:
+            return Result(Verdict.WA, f"expected '{answer}', got '{out_data}'")
         return Result(Verdict.OK, None)
 
 
@@ -77,15 +87,15 @@ class SequenceOf(Checker):
     def sort(values: Iterable[Any]) -> Iterable[Any]:
         return sorted(values, key=repr)
 
-    def check(self, input_: Any, output: Any, answer: Any) -> Result:
-        if not isinstance(output, self.as_type):
-            return Result(Verdict.IA, f"expected a list, got '{output}'")
-        if len(output) != len(answer):
-            return Result(Verdict.WA, f"expected a list of size {len(answer)}, got {len(output)}")
-        sequence = zip(output, answer) if not self.sorted else zip(self.sort(output), self.sort(answer))
+    def check(self, in_data: Any, out_data: Any, answer: Any, **__) -> Result:
+        if not isinstance(out_data, self.as_type):
+            return Result(Verdict.IA, f"expected a list, got '{out_data}'")
+        if len(out_data) != len(answer):
+            return Result(Verdict.WA, f"expected a list of size {len(answer)}, got {len(out_data)}")
+        sequence = zip(out_data, answer) if not self.sorted else zip(self.sort(out_data), self.sort(answer))
         for i, pair_ in enumerate(sequence):
             out, ans = pair_
-            result = self.sub_checker.check(input_, out, ans)
+            result = self.sub_checker.check(in_data, out, ans)
             if result.verdict != Verdict.OK:
                 result.cause = f'on position {i + 1}: {result.cause}'
                 return result
@@ -97,12 +107,12 @@ class DictOf(Checker):
         self.key_checker = key_checker
         self.value_checker = value_checker
 
-    def check(self, _: Any, output: Any, answer: dict) -> Result:
-        if not isinstance(output, dict):
-            return Result(Verdict.IA, f"expected a dict, got '{output}'")
-        if len(output) != len(answer):
-            return Result(Verdict.WA, f"expected a dict of size {len(answer)}, got {len(output)}")
-        for k1, v1 in output.items():
+    def check(self, _: Any, out_data: Any, answer: dict, **__) -> Result:
+        if not isinstance(out_data, dict):
+            return Result(Verdict.IA, f"expected a dict, got '{out_data}'")
+        if len(out_data) != len(answer):
+            return Result(Verdict.WA, f"expected a dict of size {len(answer)}, got {len(out_data)}")
+        for k1, v1 in out_data.items():
             ok = False
             for k2, v2 in answer.items():
                 k_verdict = self.key_checker.check(_, k1, k2)
@@ -119,10 +129,10 @@ class EitherOf(Checker):
     def __init__(self, *sub_checkers: Checker):
         self.sub_checkers = sub_checkers
 
-    def check(self, input_: Any, output: Any, answer: Any) -> Result:
+    def check(self, in_data: Any, out_data: Any, answer: Any, **__) -> Result:
         causes = []
         for sub_checker in self.sub_checkers:
-            verdict = sub_checker.check(input_, output, answer)
+            verdict = sub_checker.check(in_data, out_data, answer)
             causes.append(verdict.cause)
             if verdict.verdict == Verdict.OK:
                 return verdict

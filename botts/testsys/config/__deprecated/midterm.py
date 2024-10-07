@@ -1,15 +1,15 @@
 from sys import setrecursionlimit
 from datetime import datetime
 
-from ..components.base.include import inc
-from ..components.base.task import Task
-from ..components.check.checker import DictOf, EitherOf, SequenceOf, SINGLE_BOOL, SINGLE_FLOAT_6, \
+from botts.testsys.components.base.include import inc
+from botts.testsys.components.base.task import Task
+from botts.testsys.components.check.checker import DictOf, EitherOf, SequenceOf, SINGLE_BOOL, SINGLE_FLOAT_6, \
     SINGLE_NUMBER, \
     SINGLE_STRING
-from ..components.check.generator import ArgList, H, R_INT, R_STRING
-from ..components.check.validator import NO_EVAL, NO_EXEC, NO_IMPORTS, NoFnCall, NoNameNode
-from ..components.extract.jupyter import FnLocator
-from ..components.test.event import Event
+from botts.testsys.components.check.generator import ArgList, H, R_INT, R_STRING
+from botts.testsys.components.check.validator import NO_EVAL, NO_EXEC, NO_IMPORTS, NoFnCall, NoNameNode
+from botts.testsys.components.extract.jupyter import FnLocator
+from botts.testsys.components.test.event import Event
 
 DEFAULT_VAL = NO_IMPORTS & NO_EXEC & NO_EVAL & NoNameNode('globals')
 

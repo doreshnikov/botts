@@ -3,13 +3,13 @@ from random import Random
 from sys import setrecursionlimit
 from typing import Any
 
-from ...components.base.task import Task
-from ...components.check.checker import EitherOf, SequenceOf, SINGLE_BOOL, SINGLE_NUMBER, \
+from botts.testsys.components.base.task import Task
+from botts.testsys.components.check.checker import EitherOf, SequenceOf, SINGLE_BOOL, SINGLE_NUMBER, \
     SINGLE_STRING
-from ...components.check.generator import ArgList, Arguments, Generator, H, R_INT, R_PERM
-from ...components.check.validator import NO_EVAL, NO_EXEC, NO_IMPORTS, NoNameNode
-from ...components.extract.jupyter import FnLocator
-from ...components.test.event import Event
+from botts.testsys.components.check.generator import ArgList, Arguments, Generator, H, R_INT, R_PERM
+from botts.testsys.components.check.validator import NO_EVAL, NO_EXEC, NO_IMPORTS, NoNameNode
+from botts.testsys.components.extract.jupyter import FnLocator
+from botts.testsys.components.test.event import Event
 
 DEFAULT_VAL = NO_IMPORTS & NO_EXEC & NO_EVAL & NoNameNode('globals')
 
@@ -25,7 +25,7 @@ def cats_and_mice(mapping, moves):
             i, j = s.find('C'), ind
         if 'm' in s:
             k, l = s.find('m'), ind
-    if abs(k - i) + abs(l - j) <= moves:
+    if 2 * abs(k - i) + 3 * abs(l - j) <= moves:
         return 'Caught!'
     return 'Run!'
 
@@ -45,20 +45,24 @@ class CatsAndMiceGenerator(Generator):
             i, j = random.randint(0, h - 1), random.randint(0, w - 1)
             mapping[i][j] = "m"
 
-        return Arguments(args=(
-            "\n".join("".join(row) for row in mapping),
-            random.randint(5, w + h - 2)
-        ), kwargs={})
+        return Arguments(
+            args=(
+                "\n".join("".join(row) for row in mapping),
+                2 * random.randint(5, w + h - 2)
+            ),
+            kwargs={}
+        )
 
 
 def exchange(lst):
     if not isinstance(lst[0], int) or not isinstance(lst[1], int):
         return 'invalid elements'
-    return abs(int(str(lst[1])[0] + str(lst[0])[1:]) - int(str(lst[0])[0] + str(lst[1])[1:]))
+    s1, s2 = str(lst[0]), str(lst[1])
+    return abs(int(s1[:-1] + s2[-1]) - int(s2[:-1] + s1[-1]))
 
 
 def sorting_cards(cards):
-    lst = ['A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K']
+    lst = ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A']
     cards.sort(key=lst.index)
     return cards
 
@@ -67,22 +71,22 @@ def check_password(s):
     return 'valid' if (8 <= len(s) <= 20 and
                        [i for i in s if i.isupper()] and
                        [i for i in s if i.islower()] and
-                       [i for i in s if i in '!@#$%^&*?'] and
-                       not [i for i in s if not i.isalnum() and i not in '!@#$%^&*?'] and
+                       [i for i in s if i in '!@$%*.,?'] and
+                       not [i for i in s if not i.isalnum() and i not in '!@$%*.,?'] and
                        [i for i in s if i.isdigit()]) \
         else 'not valid'
 
 
 def sorted_people(a):
-    b = sorted([i for i in a if i != -1], reverse=True)
+    b = sorted([i for i in a if i != -1], reverse=False)
     return [x if x == -1 else b.pop() for x in a]
 
 
 def remove_doubles(s):
     s1 = ''
     for i in s:
-        if s1 and i == s1[-1]:
-            s1 = s1[:-1]
+        if len(s1) >= 2 and i == s1[-1] == s1[-2]:
+            s1 = s1[:-2]
         else:
             s1 += i
     return s1
@@ -101,22 +105,26 @@ def close_primes(x, y):
 
     if not prime(x) or not prime(y) or x >= y:
         return False
+    cnt = 0
     for i in range(x + 1, y):
         if prime(i):
-            return False
-    return True
+            cnt += 1
+    return cnt <= 1
 
 
 def scramble(s, array):
-    lst = ['' for _ in range(len(s))]
-    for i, j in enumerate(array):
-        lst[j] = s[i]
+    lst = list(s)
+    lst2 = ['' for _ in range(len(s))]
+    for _ in range(2):
+        for i, j in enumerate(array):
+            lst2[j] = lst[i]
+        lst = lst2[:]
     return ''.join(lst)
 
 
 CONTEST02 = Event(
     'Contest 02',
-    datetime(year=2023, month=12, day=8, hour=11, minute=40, second=0),
+    datetime(year=2023, month=12, day=8, hour=13, minute=30, second=0),
     [
         Task(
             id_='01-cats-and-mice',
@@ -293,6 +301,11 @@ CONTEST02 = Event(
                 ArgList(7, 9),
                 ArgList(7, 7),
                 ArgList(25, 25),
+                ArgList(2, 5),
+                ArgList(2, 7),
+                ArgList(3, 7),
+                ArgList(3, 9),
+                ArgList(3, 11)
             ],
             solution=close_primes
         ),

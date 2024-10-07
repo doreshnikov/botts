@@ -11,8 +11,9 @@ from ..extract.jupyter import NotebookContainer
 class Event:
     ALL: dict[str, 'Event'] = {}
 
-    def __init__(self, name: str, deadline: datetime, tasks: list[Task]):
+    def __init__(self, name: str, start: datetime, deadline: datetime, tasks: list[Task]):
         self.name = name
+        self.start = start
         self.deadline = deadline
         self.tasks = tasks
         self.id_ = name.lower().replace(' ', '-')
@@ -28,6 +29,10 @@ class Event:
         if len(task_options) == 0:
             return None
         return task_options[0]
+
+    def render_statement(self) -> str:
+        separator = '\n'
+        return separator.join(map(lambda task: task.statement.md, self.tasks))
 
     async def run(
             self, container: NotebookContainer, submission: Submission,

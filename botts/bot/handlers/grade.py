@@ -34,6 +34,7 @@ class GradeState(StatesGroup):
     INITIAL = State()
     EVENT_SELECT = State()
     FORMAT_SELECT = State()
+    CODE = State()
     FILE = State()
     TESTING = State()
     STATUS = State()
@@ -79,9 +80,9 @@ async def handle_grade(message: Message, state: FSMContext):
     allow_expired = message.from_user.id == ADMIN_ID
     reply_markup = event_selector(allow_expired=allow_expired)
     text = (
-        'Выберите задание, которое вы хотите отправить на проверку'
+        'Выберите контест, решения которого вы хотите отправить на проверку'
         if reply_markup is not None
-        else 'Нет заданий, доступных для проверки'
+        else 'Нет контестов, доступных для проверки'
     )
     reply = await message.reply(text, reply_markup=reply_markup)
     await state.update_data({'selector_message': reply})
@@ -100,7 +101,7 @@ async def handle_event(query: CallbackQuery, state: FSMContext):
     await state.set_state(GradeState.FORMAT_SELECT)
     await query.answer('Ok!')
     await selector_message.edit_text(
-        'Выберите формат сдачи \\(`.ipynb` или ~отдельным сообщением с кодом по каждой задаче~\\)',
+        'Выберите формат сдачи \\(`.ipynb` или отдельным сообщением с кодом по конкретной задаче\\)',
         reply_markup=format_selector(),
         parse_mode='MarkdownV2'
     )
@@ -111,22 +112,27 @@ async def handle_format(query: CallbackQuery, state: FSMContext, _student: Stude
     data = FormatCallback.unpack(query.data)
     state_data = await state.get_data()
     selector_message: Message = state_data['selector_message']
+    await query.answer('Ok!')
+
     if data.option == 'text':
-        Students.ban(_student, 'idiot-pressed-a-button')
-        await query.answer('Этот формат пока не поддерживается, выберите другой')
+        await state.set_state(GradeState.CODE)
+        await selector_message.edit_text(
+            f'Для сдачи задания \'{state_data["event_id"]}\' следующим сообщением '
+            f'пришлите код решения какой-либо задачи следующим сообщением',
+            reply_markup=None,
+            parse_mode='Markdown'
+        )
     else:
-        await query.answer('Ok!')
         await state.set_state(GradeState.FILE)
         await selector_message.edit_text(
             f'Для сдачи задания \'{state_data["event_id"]}\' пришлите `.ipynb`-файл '
-            f'со всеми выполненными заданиями',
+            f'со всеми выполненными вами заданиями',
             reply_markup=None,
             parse_mode='Markdown'
         )
 
 
-@grade_router.message(GradeState.FILE, F.content_type == 'document')
-async def handle_file(message: Message, state: FSMContext, bot: Bot, _student: Student):
+async def _get_author(message: Message, _student: Student) -> Student:
     is_admin = message.from_user.id == ADMIN_ID
     submission_author = _student
     if (author := message.forward_from) is not None:
@@ -134,32 +140,16 @@ async def handle_file(message: Message, state: FSMContext, bot: Bot, _student: S
             submission_author = Students.get_student_by_tg_id(author.id)
             if submission_author is None:
                 await message.reply('Изначальный отправитель не числится среди студентов курса')
-                return
             await message.reply(f'Автор: {submission_author.name}')
         else:
             await report_event(f'User {message.from_user.id} submitted a file authored by {author.id}')
+    return submission_author
 
-    document = message.document
-    if not document.file_name.endswith('.ipynb'):
-        await message.reply('Ожидается файл с разрешением .ipynb')
-        return
 
-    async with ChatActionSender.typing(bot=bot, chat_id=message.from_user.id):
-        file_content = BytesIO()
-        file = await bot.get_file(document.file_id)
-        await bot.download_file(file.file_path, destination=file_content)
-        file_content.seek(0)
-
-    try:
-        json_content = json.load(file_content)
-        container = NotebookContainer(json_content)
-    except json.JSONDecodeError as e:
-        await message.reply(f'Файл поврежден или не является корректным .ipynb-файлом:\n```{e}```')
-        return
-    except ValueError as e:
-        await message.reply(f'Файл не является корректным .ipynb-файлом:\n```{e}```')
-        return
-
+async def _grade(
+        author: Student, container: NotebookContainer, file_path: str | None,
+        message: Message, state: FSMContext, bot: Bot
+):
     event_id = (await state.get_data())['event_id']
     event = Event.ALL[event_id]
     batch_size = max(len(event.tasks) // 10, 1)
@@ -202,8 +192,8 @@ async def handle_file(message: Message, state: FSMContext, bot: Bot, _student: S
     submission = Submission.create(
         timestamp=time.time(),
         event=event_id,
-        student=submission_author,
-        file_path=file.file_path,
+        student=author,
+        file_path=file_path,
         message_id=reply.message_id
     )
     loop = asyncio.get_running_loop()
@@ -211,6 +201,48 @@ async def handle_file(message: Message, state: FSMContext, bot: Bot, _student: S
         container, submission,
         callback, final_callback
     ))
+
+
+@grade_router.message(GradeState.CODE)
+async def handle_code(message: Message, state: FSMContext, bot: Bot, _student: Student):
+    author = await _get_author(message, _student)
+    container = NotebookContainer({
+        'cells': [
+            {
+                'cell_type': 'code',
+                'source': [message.text]
+            }
+        ]
+    })
+    await _grade(author, container, None, message, state, bot)
+
+
+@grade_router.message(GradeState.FILE, F.content_type == 'document')
+async def handle_file(message: Message, state: FSMContext, bot: Bot, _student: Student):
+    author = await _get_author(message, _student)
+
+    document = message.document
+    if not document.file_name.endswith('.ipynb'):
+        await message.reply('Ожидается файл с разрешением .ipynb')
+        return
+
+    async with ChatActionSender.typing(bot=bot, chat_id=message.chat.id):
+        file_content = BytesIO()
+        file = await bot.get_file(document.file_id)
+        await bot.download_file(file.file_path, destination=file_content)
+        file_content.seek(0)
+
+    try:
+        json_content = json.load(file_content)
+        container = NotebookContainer(json_content)
+    except json.JSONDecodeError as e:
+        await message.reply(f'Файл поврежден или не является корректным .ipynb-файлом:\n```{e}```')
+        return
+    except ValueError as e:
+        await message.reply(f'Файл не является корректным .ipynb-файлом:\n```{e}```')
+        return
+
+    await _grade(author, container, file.file_path, message, state, bot)
 
 
 @grade_router.message(Command('status'))

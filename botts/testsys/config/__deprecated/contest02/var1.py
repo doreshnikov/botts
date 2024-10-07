@@ -1,16 +1,15 @@
-import random
 from datetime import datetime
 from random import Random
 from sys import setrecursionlimit
 from typing import Any
 
-from ...components.base.task import Task
-from ...components.check.checker import EitherOf, SequenceOf, SINGLE_BOOL, SINGLE_NUMBER, \
+from botts.testsys.components.base.task import Task
+from botts.testsys.components.check.checker import EitherOf, SequenceOf, SINGLE_BOOL, SINGLE_NUMBER, \
     SINGLE_STRING
-from ...components.check.generator import ArgList, Arguments, Generator, H, R_INT, R_PERM
-from ...components.check.validator import NO_EVAL, NO_EXEC, NO_IMPORTS, NoNameNode
-from ...components.extract.jupyter import FnLocator
-from ...components.test.event import Event
+from botts.testsys.components.check.generator import ArgList, Arguments, Generator, H, R_INT, R_PERM
+from botts.testsys.components.check.validator import NO_EVAL, NO_EXEC, NO_IMPORTS, NoNameNode
+from botts.testsys.components.extract.jupyter import FnLocator
+from botts.testsys.components.test.event import Event
 
 DEFAULT_VAL = NO_IMPORTS & NO_EXEC & NO_EVAL & NoNameNode('globals')
 
@@ -26,8 +25,7 @@ def cats_and_mice(mapping, moves):
             i, j = s.find('C'), ind
         if 'm' in s:
             k, l = s.find('m'), ind
-    h, w = abs(k - i), abs(l - j)
-    if max(h, w) <= moves:
+    if abs(k - i) + abs(l - j) <= moves:
         return 'Caught!'
     return 'Run!'
 
@@ -47,24 +45,20 @@ class CatsAndMiceGenerator(Generator):
             i, j = random.randint(0, h - 1), random.randint(0, w - 1)
             mapping[i][j] = "m"
 
-        return Arguments(
-            args=(
-                "\n".join("".join(row) for row in mapping),
-                random.randint(5, w + h - 2)
-            ),
-            kwargs={}
-        )
+        return Arguments(args=(
+            "\n".join("".join(row) for row in mapping),
+            random.randint(5, w + h - 2)
+        ), kwargs={})
 
 
 def exchange(lst):
     if not isinstance(lst[0], int) or not isinstance(lst[1], int):
         return 'invalid elements'
-    s1, s2 = str(lst[0]), str(lst[1])
-    return abs(int(s2[-1] + s1[1:]) - int(s2[:-1] + s1[0]))
+    return abs(int(str(lst[1])[0] + str(lst[0])[1:]) - int(str(lst[0])[0] + str(lst[1])[1:]))
 
 
 def sorting_cards(cards):
-    lst = ['T', 'J', 'Q', 'K', 'A', '2', '3', '4', '5', '6', '7', '8', '9']
+    lst = ['A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K']
     cards.sort(key=lst.index)
     return cards
 
@@ -75,12 +69,12 @@ def check_password(s):
                        [i for i in s if i.islower()] and
                        [i for i in s if i in '!@#$%^&*?'] and
                        not [i for i in s if not i.isalnum() and i not in '!@#$%^&*?'] and
-                       len([i for i in s if i.isdigit()]) >= 2) \
+                       [i for i in s if i.isdigit()]) \
         else 'not valid'
 
 
 def sorted_people(a):
-    b = sorted([i for i in a if i != -1], reverse=len(a) % 2 == 1)
+    b = sorted([i for i in a if i != -1], reverse=True)
     return [x if x == -1 else b.pop() for x in a]
 
 
@@ -89,7 +83,6 @@ def remove_doubles(s):
     for i in s:
         if s1 and i == s1[-1]:
             s1 = s1[:-1]
-            s1 += i.upper()
         else:
             s1 += i
     return s1
@@ -106,24 +99,24 @@ def close_primes(x, y):
             i += 1
         return True
 
-    if not prime(x) or not prime(y):
+    if not prime(x) or not prime(y) or x >= y:
         return False
-    cnt = 0
     for i in range(x + 1, y):
         if prime(i):
-            cnt += 1
-    return cnt
+            return False
+    return True
 
 
 def scramble(s, array):
-    lst = [s[i] for i in array]
-    lst2 = [lst[i] for i in array]
-    return ''.join(lst2)
+    lst = ['' for _ in range(len(s))]
+    for i, j in enumerate(array):
+        lst[j] = s[i]
+    return ''.join(lst)
 
 
 CONTEST02 = Event(
     'Contest 02',
-    datetime(year=2023, month=12, day=8, hour=15, minute=26, second=0),
+    datetime(year=2023, month=12, day=8, hour=11, minute=40, second=0),
     [
         Task(
             id_='01-cats-and-mice',
@@ -282,7 +275,7 @@ CONTEST02 = Event(
             locator=FnLocator('close_primes'),
             include=[],
             validator=DEFAULT_VAL,
-            checker=EitherOf(SINGLE_BOOL, SINGLE_NUMBER),
+            checker=SINGLE_BOOL,
             tests=[
                 ArgList(1, 3),
                 ArgList(17, 19),
@@ -300,11 +293,6 @@ CONTEST02 = Event(
                 ArgList(7, 9),
                 ArgList(7, 7),
                 ArgList(25, 25),
-                ArgList(2, 5),
-                ArgList(2, 7),
-                ArgList(3, 7),
-                ArgList(3, 9),
-                ArgList(3, 11)
             ],
             solution=close_primes
         ),
@@ -334,11 +322,3 @@ CONTEST02 = Event(
         )
     ]
 )
-
-if __name__ == '__main__':
-    x = R_INT(7, 21).map(
-        lambda s: R_INT(35, 122).map(chr).repeat(s)
-    ).map(
-        lambda cs: ''.join(cs)
-    )(random.Random())
-    print(x)

@@ -8,6 +8,13 @@ from ..tg_user import TGUser
 
 class Students:
     @staticmethod
+    def get_student_by_id(student_id: int) -> Student | None:
+        query = (Student
+                 .select(Student)
+                 .where(Student.id_ == student_id))
+        return query.first()
+
+    @staticmethod
     def get_student_by_tg_id(tg_id: int) -> Student | None:
         query = (Student
                  .select(Student)
