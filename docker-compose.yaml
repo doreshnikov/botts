@@ -5,3 +5,7 @@ services:
       dockerfile: invoker/Dockerfile
     ports:
       - 8080-8100:80
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"

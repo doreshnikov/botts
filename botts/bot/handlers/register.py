@@ -8,6 +8,7 @@ from aiogram.fsm.state import State, StatesGroup
 from aiogram.types import CallbackQuery, InlineKeyboardButton, InlineKeyboardMarkup, Message
 
 from botts.bot.config.local import COURSE_TABLE_URL, report_event
+from botts.bot.util.text import escape_md
 from botts.db.dao.students import Students
 from botts.db.student import Student
 
@@ -140,7 +141,7 @@ async def handle_confirmation(callback: CallbackQuery, state: FSMContext):
     if (tg_user := student.tg_user.first()) is None:
         Students.update_tg_data(student, from_user.id, from_user.username)
         if student.group == 'teacher':
-            await report_event(f'User @{from_user.username} ({from_user.id}) registered as a teacher')
+            await report_event(f'User @{escape_md(from_user.username)} ({from_user.id}) registered as a teacher')
         await callback.answer('Супер!')
         await state.clear()
     else:
