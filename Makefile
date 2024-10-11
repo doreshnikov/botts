@@ -9,12 +9,12 @@ update: update-tgutils
 	poetry update
 
 build: update
-	docker-compose build
+	docker compose build
 
 icount := 5
 invokers: build
-	docker-compose down
-	docker-compose up --scale invoker=${icount} -d
+	docker compose down
+	docker compose up --scale invoker=${icount} -d
 
 debug := 0
 run: invokers

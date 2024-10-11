@@ -9,10 +9,10 @@ readme = "README.md"
 python = "^3.12"
 aiogram = "^3.13.1"
 emoji = "^2.13.4"
-peewee = "^3.17.6"
 pandas = "^2.2.3"
 docker = "^7.1.0"
 pyYAML = "^6.0.2"
+peewee = "^3.17.6"
 
 [tool.poetry.group.dev.dependencies]
 setuptools = "^75.1.0"
