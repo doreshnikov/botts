@@ -21,4 +21,5 @@ RUN make --directory=./isolate/ install
 
 RUN pip3 install PyYAML
 
+RUN mkdir -p logs
 ENTRYPOINT [ "python3.12", "-m", "invoker.runners.mp" ]

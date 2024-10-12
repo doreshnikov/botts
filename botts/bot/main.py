@@ -2,7 +2,7 @@ import asyncio
 
 from aiogram import Dispatcher
 
-from tgutils.middleware.logging import LoggingMiddleware
+from tgutils.middleware.logging import LoggingMiddleware, DEFAULT_FIELD_RULES
 
 from common.logging import setup_logging
 from .config.local import BOT
@@ -25,7 +25,7 @@ dispatcher.include_routers(
 )
 dispatcher.include_router(master_router)
 
-LoggingMiddleware.inject(dispatcher)
+dispatcher.update.outer_middleware(LoggingMiddleware(field_rules=DEFAULT_FIELD_RULES))
 dispatcher.update.outer_middleware(StudentDataMiddleware())
 dispatcher.message.middleware(AuthorizationMiddleware())
 dispatcher.message.middleware(TestingWall())
