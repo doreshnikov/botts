@@ -7,11 +7,11 @@ from botts.testsys.components.base.task import Task
 from botts.testsys.components.check.checker import EitherOf, SequenceOf, SINGLE_BOOL, SINGLE_NUMBER, \
     SINGLE_STRING
 from botts.testsys.components.check.generator import ArgList, Arguments, Generator, H, R_INT, R_PERM
-from botts.testsys.components.check.validator import NO_EVAL, NO_EXEC, NO_IMPORTS, NoNameNode
+from botts.testsys.components.check.validator import NO_EVAL, NO_EXEC, NO_IMPORTS, NoNodeName
 from botts.testsys.components.extract.jupyter import FnLocator
 from botts.testsys.components.test.event import Event
 
-DEFAULT_VAL = NO_IMPORTS & NO_EXEC & NO_EVAL & NoNameNode('globals')
+DEFAULT_VAL = NO_IMPORTS & NO_EXEC & NO_EVAL & NoNodeName('globals')
 
 setrecursionlimit(100000)
 

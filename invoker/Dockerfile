@@ -5,7 +5,9 @@ LABEL service="invoker"
 USER root
 
 WORKDIR /home/botts
-COPY .. /home/botts
+COPY ../common /home/botts/common
+COPY ../resources /home/botts/resources
+COPY ../invoker /home/botts/invoker
 
 RUN --mount=target=/var/lib/apt/lists,type=cache,sharing=locked \
     --mount=target=/var/cache/apt,type=cache,sharing=locked \

@@ -7,11 +7,11 @@ from botts.testsys.components.check.checker import DictOf, EitherOf, SequenceOf,
     SINGLE_NUMBER, \
     SINGLE_STRING
 from botts.testsys.components.check.generator import ArgList, H, R_INT, R_STRING
-from botts.testsys.components.check.validator import NO_EVAL, NO_EXEC, NO_IMPORTS, NoFnCall, NoNameNode
+from botts.testsys.components.check.validator import NO_EVAL, NO_EXEC, NO_IMPORTS, NoFnCall, NoNodeName
 from botts.testsys.components.extract.jupyter import FnLocator
 from botts.testsys.components.test.event import Event
 
-DEFAULT_VAL = NO_IMPORTS & NO_EXEC & NO_EVAL & NoNameNode('globals')
+DEFAULT_VAL = NO_IMPORTS & NO_EXEC & NO_EVAL & NoNodeName('globals')
 
 setrecursionlimit(100000)
 
@@ -227,7 +227,7 @@ MIDTERM = Event(
             id_='04-decimal',
             locator=FnLocator('decimal'),
             include=[],
-            validator=DEFAULT_VAL & NoFnCall('int') & NoNameNode('int'),
+            validator=DEFAULT_VAL & NoFnCall('int') & NoNodeName('int'),
             checker=SINGLE_NUMBER,
             tests=[
                 ArgList(100),

@@ -7,13 +7,7 @@ from botts.testsys.components.check.generator import ArgList
 from botts.testsys.components.check.validator import NO_IMPORTS, NO_EXEC, NO_EVAL
 from botts.testsys.components.extract.jupyter import FnLocator
 
-
-class _X:
-    def __str__(self):
-        return '<X object>'
-
-    def __eq__(self, other):
-        return isinstance(other, self.__class__)
+from resources.tests.python.x import X
 
 
 def solution(a: list) -> list:
@@ -45,7 +39,7 @@ TASK = Task(
         ''')
     ),
     include=[
-        inc(f'from botts.testsys.config.tasks.test.unique import _X')
+        inc(f'from {X.__module__} import X')
     ],
     locator=FnLocator('unique'),
     validator=NO_IMPORTS & NO_EXEC & NO_EVAL,
@@ -56,8 +50,8 @@ TASK = Task(
         ArgList([]),
         ArgList(['x', 'y', 'z', 1, 2, 3]),
         ArgList([1, 1, 1]),
-        ArgList([{}, set(), [], _X()]),
-        ArgList([_X(), _X(), _X(), _X, _X])
+        ArgList([{}, set(), [], X()]),
+        ArgList([X(), X(), X, X(), X, X])
     ],
     solution=solution,
 )

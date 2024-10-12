@@ -49,7 +49,7 @@ class NoFnCall(Validator):
         return None
 
 
-class NoNameNode(Validator):
+class NoNodeName(Validator):
     def __init__(self, name: str):
         self.name = name
 
@@ -60,10 +60,10 @@ class NoNameNode(Validator):
         return None
 
 
-NO_IMPORTS = NoNodeType(ast.Import) & NoNodeType(ast.ImportFrom)
+NO_IMPORTS = NoNodeType(ast.Import) & NoNodeType(ast.ImportFrom) & NoNodeName('__import__')
 NO_LOCAL_FUNCTIONS = NoNodeType(ast.FunctionDef)
-NO_EXEC = NoFnCall('exec') & NoNameNode('exec')
-NO_EVAL = NoFnCall('eval') & NoNameNode('eval')
+NO_EXEC = NoFnCall('exec') & NoNodeName('exec')
+NO_EVAL = NoFnCall('eval') & NoNodeName('eval')
 
 
 class CheckRecursion(Validator):

@@ -1,16 +1,14 @@
+from common.logging import setup_logging
+
 import ast
 import logging
 import pickle
 import socket
-import sys
-
 from dataclasses import dataclass, field
 from multiprocessing import Process, Queue
 from typing import Any
 
 from invoker.common import InvokerServiceBase
-
-logging.basicConfig(level=logging.INFO)
 
 
 @dataclass
@@ -163,5 +161,5 @@ class Invoker(InvokerServiceBase):
 
 
 if __name__ == '__main__':
-    port = 80
-    Invoker(port).start()
+    setup_logging()
+    Invoker(80).start()

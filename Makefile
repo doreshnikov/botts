@@ -2,7 +2,9 @@ poetry-export:
 	poetry export -f requirements.txt --output requirements.txt
 
 update-tgutils:
-	cd aiogram-utils && git pull origin main
+	cd aiogram-utils && \
+		git fetch --all && \
+		git reset --hard origin/main
 	pip install ./aiogram-utils
 
 update: update-tgutils
