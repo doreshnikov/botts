@@ -138,7 +138,11 @@ class Runner:
                     await step_callback(results)
                     continue
 
-                result = Runner(task)._do_run(solution)
+                kwargs = {}
+                if task.extended_info:
+                    kwargs['student_id'] = submission.student.id_
+                result = Runner(task)._do_run(solution, **kwargs)
+
                 results[run.id_] = result
                 run.verdict = result.verdict.name
                 run.comment = result.cause

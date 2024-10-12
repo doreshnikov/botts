@@ -22,5 +22,5 @@ ensure-logs:
 	mkdir -p logs
 
 debug := 0
-run: invokers
+run: invokers ensure-logs
 	DEBUG=${debug} python -m botts.bot.main

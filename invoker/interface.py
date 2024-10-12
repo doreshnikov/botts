@@ -11,6 +11,24 @@ def _read_terminal(cmd: str) -> str:
     return p.stdout.read().decode('utf-8').strip()
 
 
+def _extract_port(container: Container):
+    ports = container.ports['80/tcp']
+    return int(ports[0]['HostPort'])
+
+
+class ContainersHolder:
+    def __init__(self, containers: list[Container]):
+        self.port_mapping = {
+            _extract_port(cnt): cnt
+            for cnt in containers
+            if cnt.status == 'running'
+        }
+        self._id_mapping = {cnt.id: cnt for cnt in containers}
+
+    def get_by_id(self, id_: str) -> Container | None:
+        return self._id_mapping.get(id_)
+
+
 class Client:
     def __init__(self):
         context = _read_terminal(
@@ -40,19 +58,11 @@ class Client:
         images = self.client.images.list(all=True, filters={'label': f'service={self.service}'})
         return images[0]
 
-    @staticmethod
-    def _extract_port(container: Container):
-        ports = container.ports['80/tcp']
-        return int(ports[0]['HostPort'])
-
     @property
-    def containers(self) -> dict[int, Container]:
+    def containers(self) -> ContainersHolder:
         image = self.image
         containers = self.client.containers.list(all=True, filters={'ancestor': image.id})
-        return {
-            self._extract_port(container): container
-            for container in containers
-        }
+        return ContainersHolder(containers)
 
 
 if __name__ == '__main__':

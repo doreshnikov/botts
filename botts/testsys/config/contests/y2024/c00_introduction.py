@@ -8,6 +8,6 @@ from botts.testsys.config.tasks.test.unique import TASK as _unique
 EVENT = Event(
     '00-introduction',
     datetime(year=2024, month=10, day=7, hour=21, minute=0, second=0),
-    datetime(year=2024, month=10, day=14, hour=0, minute=0, second=0),
+    datetime(year=2024, month=10, day=20, hour=0, minute=0, second=0),
     [_whoami, _unique]
 )

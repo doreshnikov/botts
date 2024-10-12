@@ -68,9 +68,11 @@ class SocketWrapper(InvokerBase):
                 data += self.socket.recv(SocketWrapper.CHUNK_SIZE)
             return pickle.loads(data[:size])
         except TimeoutError as e:
-            cnt = self.owner.docker_client.containers.get(self.id_)
-            report_fail(f'```Invoker {self.id_}:{self.port} not responding:\n'
-                        f'{cnt.logs().decode("utf-8")}```')
+            cnt = self.owner.docker_client.containers.get_by_id(self.id_)
+            report_fail(
+                f'```Invoker {self.id_}:{self.port} not responding:\n'
+                f'{cnt.logs().decode("utf-8")}```'
+            )
             return {
                 'verdict': 'CF',
                 'message': f'invoker failed to respond in {SocketWrapper.INVOKER_TIMEOUT}s'
@@ -92,7 +94,7 @@ class SocketWrapper(InvokerBase):
 class InvokerPool:
     def __init__(self):
         self.docker_client = invoker.interface.Client()
-        self.config = self.docker_client.containers
+        self.config = self.docker_client.containers.port_mapping
 
         self.status: dict[int, Status] = {}
         self.queue = Queue()
