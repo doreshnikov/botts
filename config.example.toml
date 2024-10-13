@@ -1,5 +1,5 @@
 [sheets]
-course_table_url = '<url to course export table>' # currently unused
+course_table_url = 'https://example.com'
 
 [bot]
 token = '<main bot token>'
