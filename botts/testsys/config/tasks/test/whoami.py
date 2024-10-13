@@ -17,7 +17,8 @@ class WhoamiChecker(Checker):
 
         if not isinstance(out_data, str):
             return Result(Verdict.IA, f"result '{out_data}' is not a string")
-        if out_data.strip() != student.name:
+        out_data = out_data.strip()
+        if out_data != student.name:
             return Result(Verdict.WA, f"result '{out_data}' is not your name")
 
         return Result(Verdict.OK, None)
