@@ -1,13 +1,11 @@
-from common.logging import setup_logging
-
 import ast
-import logging
 import pickle
 import socket
 from dataclasses import dataclass, field
 from multiprocessing import Process, Queue
 from typing import Any
 
+from common.logging import setup_logging
 from invoker.common import InvokerServiceBase
 
 

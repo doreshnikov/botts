@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: invoker/Dockerfile
     ports:
-      - 8080-8100:80
+      - 65500-65535:80
     logging:
       driver: "json-file"
       options:

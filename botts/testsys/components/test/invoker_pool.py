@@ -1,14 +1,9 @@
-import json
 import logging
 import pickle
 from enum import Enum
-from pathlib import Path
 from queue import Queue
 from socket import AF_INET, SOCK_STREAM, socket
-from subprocess import Popen
 from typing import Any
-
-import docker
 
 import invoker.interface
 from botts.bot.config.local import report_fail
