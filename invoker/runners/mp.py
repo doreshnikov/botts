@@ -155,7 +155,11 @@ class Invoker(InvokerServiceBase):
             while True:
                 conn, addr = s.accept()
                 self.logger.info(f'Connection by {addr}')
-                self.process(conn)
+                if not addr[0].startswith('172.'):
+                    self.logger.info('Not a host IP, ignoring connection')
+                    conn.close()
+                else:
+                    self.process(conn)
 
 
 if __name__ == '__main__':

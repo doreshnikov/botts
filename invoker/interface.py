@@ -1,14 +1,10 @@
 from pprint import pp
-from subprocess import Popen, PIPE
 
 import docker
 from docker.models.containers import Container
 from docker.models.images import Image
 
-
-def _read_terminal(cmd: str) -> str:
-    p = Popen(cmd, stdout=PIPE, shell=True)
-    return p.stdout.read().decode('utf-8').strip()
+from common.terminal import read_terminal
 
 
 def _extract_port(container: Container):
@@ -31,12 +27,12 @@ class ContainersHolder:
 
 class Client:
     def __init__(self):
-        context = _read_terminal(
+        context = read_terminal(
             'docker info | '
             'awk \'/[[:blank:]]*Context/ '
             '{ split($0,a,":"); gsub(/[[:blank:]]/,"",a[2]); print a[2] }\''
         )
-        endpoint = _read_terminal(
+        endpoint = read_terminal(
             'docker context ls | '
             f'awk \'$1=="{context}" '
             '{ for(i=1;i<=NF;i++) { if($i~/.*\\.sock/) { print $i } } }\''
