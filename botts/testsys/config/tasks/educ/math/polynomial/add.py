@@ -66,4 +66,4 @@ TASK = Task(
         )
     ],
     solution=solution
-),
+)

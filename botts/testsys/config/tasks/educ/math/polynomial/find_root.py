@@ -55,4 +55,4 @@ TASK = Task(
         )
     ],
     solution=None
-),
+)

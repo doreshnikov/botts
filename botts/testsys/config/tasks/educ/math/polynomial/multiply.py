@@ -35,4 +35,4 @@ TASK = Task(
     tests=_TASK_add.tests,
     solution=solution,
     time_limit=3
-),
+)

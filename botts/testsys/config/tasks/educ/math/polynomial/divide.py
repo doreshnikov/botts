@@ -60,4 +60,4 @@ TASK = Task(
     ],
     solution=solution,
     time_limit=3
-),
+)

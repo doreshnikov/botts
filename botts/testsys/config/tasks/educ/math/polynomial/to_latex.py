@@ -50,7 +50,7 @@ TASK = Task(
         inc('polynomial = list[int | float]')
     ],
     validator=NO_IMPORTS & NO_EXEC & NO_EVAL,
-    checker=Checker(),
+    checker=LatexChecker(),
     tests=_TASK_to_string.tests,
     solution=solution
-),
+)

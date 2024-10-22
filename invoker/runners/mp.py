@@ -27,9 +27,15 @@ class Invoker(InvokerServiceBase):
 
         if not isinstance(source, ast.Module):
             source = ast.Module(body=[source])
-        code = compile(source, filename='<ast>', mode='exec')
-        evaluate = ast.parse(f'{fn_name}(*args)', mode='eval')
-        expr = compile(evaluate, filename='<ast>', mode='eval')
+
+        try:
+            code = compile(source, filename='<ast>', mode='exec')
+            evaluate = ast.parse(f'{fn_name}(*args)', mode='eval')
+            expr = compile(evaluate, filename='<ast>', mode='eval')
+        except SyntaxError as e:
+            response['verdict'] = 'RE'
+            response['message'] = f'Could not compile: \'{e}\''
+
         queue = Queue()
 
         # noinspection PyUnusedLocal

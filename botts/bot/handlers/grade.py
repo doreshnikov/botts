@@ -57,7 +57,8 @@ def event_selector(allow_expired: bool = True):
         count += 1
         builder.row(
             InlineKeyboardButton(
-                text=event.name, callback_data=EventCallback(option=event_id).pack()
+                text=f'{event.name} (до {event.deadline.day}.{event.deadline.month})',
+                callback_data=EventCallback(option=event_id).pack()
             )
         )
     if count == 0:

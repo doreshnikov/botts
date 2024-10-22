@@ -3,10 +3,9 @@ import textwrap
 from botts.testsys.components.base.include import inc
 from botts.testsys.components.base.task import Task, Statement
 from botts.testsys.components.check.checker import SINGLE_FLOAT_6
-from botts.testsys.components.check.generator import ArgList, H, R_FLOAT
+from botts.testsys.components.check.generator import ArgList, H
 from botts.testsys.components.check.validator import NO_IMPORTS, NO_EXEC, NO_EVAL
 from botts.testsys.components.extract.jupyter import FnLocator
-
 from . import *
 
 
@@ -21,11 +20,13 @@ TASK = Task(
     id_='triangle-area',
     statement=Statement(
         md=textwrap.dedent('''
-        Напишите функцию, принимающую три точки (точка &ndash; `tuple` из двух `float`),
+        `> TRIANGLE AREA`
+        
+        Напишите функцию `triangle_area`, принимающую три точки (точка \N{EN DASH} `tuple` из двух `float`),
         и возвращающую площадь треугольника с вершинами в данных точках.
         
         *Примечание*: формула Герона не даст достаточной точности, почитайте про другие
-        способы определить площадь треугольника по координатам его вершин.
+        способы определить площадь треугольника по координатам его вершин.  Модуль `math` уже импортирован.
         ''')
     ),
     locator=FnLocator('triangle_area'),

@@ -80,4 +80,4 @@ TASK = Task(
         )
     ],
     solution=solution
-),
+)

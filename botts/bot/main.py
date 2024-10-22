@@ -33,7 +33,11 @@ dispatcher.message.middleware(TestingWall())
 
 async def main():
     import botts.testsys.config.contests.y2024.c00_introduction as intro
+    import botts.testsys.config.contests.y2024.c01_maths as maths
+    import botts.testsys.config.contests.y2024.c02_polynomials as polynomials
     _ = intro.EVENT
+    _ = maths.EVENT
+    _ = polynomials.EVENT
     await dispatcher.start_polling(BOT)
 
 
