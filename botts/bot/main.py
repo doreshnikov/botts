@@ -12,6 +12,7 @@ from .handlers.infra.register import router as register_router
 from .handlers.infra.start import router as start_router
 from .handlers.master import master_router
 from .handlers.statement import statement_router
+from .middlewares.formatting import FormattingMiddleware
 
 from .middlewares.testing_wall import TestingWall
 from .middlewares.tg_user_data import AuthorizationMiddleware, StudentDataMiddleware
@@ -29,6 +30,7 @@ dispatcher.update.outer_middleware(LoggingMiddleware(field_rules=DEFAULT_FIELD_R
 dispatcher.update.outer_middleware(StudentDataMiddleware())
 dispatcher.message.middleware(AuthorizationMiddleware())
 dispatcher.message.middleware(TestingWall())
+dispatcher.message.middleware(FormattingMiddleware())
 
 
 async def main():
