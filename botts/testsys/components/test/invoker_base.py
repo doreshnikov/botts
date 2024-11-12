@@ -1,18 +1,9 @@
 import ast
 from abc import ABC, abstractmethod
-from dataclasses import dataclass, field
-from typing import Any
 
 from botts.testsys.components.base.units import CodeUnit
-from botts.testsys.components.check.checker import Verdict
 from botts.testsys.components.check.generator import Arguments
-
-
-@dataclass
-class TestingResult:
-    verdict: Verdict
-    message: str | None
-    value: Any = field(default=None)
+from common.testsys.runner import TestingResult, Verdict
 
 
 class VerdictError(Exception):

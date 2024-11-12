@@ -1,5 +1,0 @@
-[07.11.24 12:56:03] DEBUG [asyncio.__init__:64] Using selector: KqueueSelector
-[07.11.24 12:56:03] INFO [aiogram.dispatcher.start_polling:527] Start polling
-[07.11.24 12:56:03] INFO [aiogram.dispatcher._polling:341] Run polling for bot @testing_dummy_bot id=6377300361 - 'Testing Dummy'
-[07.11.24 12:56:03] INFO [aiogram.dispatcher._polling:359] Polling stopped for bot @testing_dummy_bot id=6377300361 - 'Testing Dummy'
-[07.11.24 12:56:03] INFO [aiogram.dispatcher.start_polling:554] Polling stopped
