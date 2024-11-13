@@ -7,10 +7,10 @@ from typing import Any
 
 import invoker.interface
 from botts.bot.config.local import report_fail
-from botts.testsys.components.base.units import CodeUnit
-from botts.testsys.components.check.checker import Verdict
-from botts.testsys.components.check.generator import Arguments
-from botts.testsys.components.test.invoker_base import InvokerBase, TestingResult
+from botts.testsys.components.base.code import CodeUnit
+from botts.testsys.components.process.check import Verdict
+from botts.testsys.components.process.generate import Arguments
+from botts.testsys.components.run.invoker import InvokerBase, TestingResult
 
 
 class Status(Enum):

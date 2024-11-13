@@ -16,9 +16,9 @@ from botts.bot.util.text import escape_md
 from botts.db.dao.master import Master
 from botts.db.run import Run
 from botts.db.util.filter import DBFilter
-from botts.testsys.components.check.checker import Result, Verdict
-from botts.testsys.components.test.event import Event
-from botts.testsys.components.test.runner import Runner
+from botts.testsys.components.process.check import Result, Verdict
+from botts.testsys.components.extract.contest import Contest
+from botts.testsys.components.run.runner import Runner
 
 master_router = Router()
 
@@ -274,7 +274,7 @@ async def handle_rejudge(query: CallbackQuery, state: FSMContext, bot: Bot):
     await state.set_state(MasterState.JUDGING)
     loop = asyncio.get_running_loop()
     loop.create_task(Runner.rejudge(
-        selected_runs, Event.resolve_task,
+        selected_runs, Contest.resolve_task,
         callback, final_callback
     ))
 

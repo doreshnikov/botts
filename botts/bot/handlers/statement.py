@@ -9,7 +9,7 @@ from botts.bot.config.local import ADMIN_ID
 
 from .grade import event_selector
 from ..util.text import escape_md
-from ...testsys.components.test.event import Event
+from ...testsys.components.extract.contest import Contest
 
 statement_router = Router()
 
@@ -41,7 +41,7 @@ async def handle_grade(message: Message, state: FSMContext):
 async def handle_event(query: CallbackQuery, state: FSMContext):
     data = EventCallback.unpack(query.data)
     selector_message: Message = (await state.get_data())['selector_message']
-    event = Event.ALL[data.option]
+    event = Contest.ALL[data.option]
 
     await query.answer('Ok!')
     await state.clear()

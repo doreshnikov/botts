@@ -1,8 +1,8 @@
 import ast
 from abc import ABC, abstractmethod
 
-from botts.testsys.components.base.units import CodeUnit
-from botts.testsys.components.check.generator import Arguments
+from botts.testsys.components.base.code import CodeUnit
+from botts.testsys.components.process.generate import Arguments
 from common.testsys.runner import TestingResult, Verdict
 
 
@@ -24,8 +24,7 @@ class InvokerBase(ABC):
         return wrapped
 
     @abstractmethod
-    def invoke(self, source: str | CodeUnit, args: Arguments, time_limit: int | float,
-               executor: str | None) -> TestingResult:
+    def invoke(self, source: str | CodeUnit, args: Arguments, time_limit: int | float, executor: str | None) -> TestingResult:
         pass
 
 

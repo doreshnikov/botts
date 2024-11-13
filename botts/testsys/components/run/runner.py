@@ -7,21 +7,18 @@ from typing import Awaitable, Callable
 from botts.bot.config.local import report_fail
 from botts.db.run import Run
 from botts.db.submission import Submission
+
 from .invoker_pool import FailedContainerException, INVOKER_POOL
 from ..base.task import Task
-from ..base.units import FnCodeUnit
-from ..check.checker import Result, Verdict
-from ..check.generator import Arguments
+from ..base.code import CodeUnit
+from ..process.check import Result, Verdict
+from ..process.generate import Arguments
 
 
 def safe_run(fn: Callable, input_: Arguments):
-    try:
-        args = copy.deepcopy(input_.args)
-        kwargs = copy.deepcopy(input_.kwargs)
-        result = fn(*args, **kwargs)
-    except Exception as e:
-        return e
-    return result
+    args = copy.deepcopy(input_.args)
+    kwargs = copy.deepcopy(input_.kwargs)
+    return fn(*args, **kwargs)
 
 
 class Runner:
@@ -32,6 +29,8 @@ class Runner:
     @staticmethod
     def solution_hash(source: ast.AST):
         return hash(ast.dump(source))
+    
+    def _run_on_test(self, source: CodeUnit, )
 
     def _do_run(self, source: str, **kwargs) -> Result:
         random = Random()
@@ -46,9 +45,10 @@ class Runner:
                 solution = self.task.solution
                 if self.task.executor is not None:
                     solution = self.task.executor(solution)
-                answer = safe_run(solution, test)
-                if isinstance(answer, Exception):
-                    return Result(Verdict.CF, f'[test {i + 1}] error while running correct solution: {answer}')
+                try:
+                    answer = safe_run(solution, test)
+                except Exception as e:
+                    return Result(Verdict.CF, f'[test {i + 1}] error while running correct solution: {e}')
 
             invoker_id, invoker_port = None, None
             try:

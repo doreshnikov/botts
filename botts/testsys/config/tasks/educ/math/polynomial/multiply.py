@@ -2,8 +2,8 @@ import textwrap
 
 from botts.testsys.components.base.include import inc
 from botts.testsys.components.base.task import Task, Statement
-from botts.testsys.components.check.checker import SequenceOf, SINGLE_FLOAT_6
-from botts.testsys.components.check.validator import NO_IMPORTS, NO_EXEC, NO_EVAL
+from botts.testsys.components.process.check import SequenceOf, SINGLE_FLOAT_6
+from botts.testsys.components.process.validate import NO_IMPORTS, NO_EXEC, NO_EVAL
 from botts.testsys.components.extract.jupyter import FnLocator
 
 from . import *

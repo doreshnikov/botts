@@ -28,19 +28,6 @@ multiprocessing.reduction.ForkingPickler = dill.Pickler
 multiprocessing.reduction.dump = dill.dump
 
 
-# noinspection PyBroadException
-def _evaluate(fn_definition, fn_call, pipe: Connection):
-    try:
-        exec(fn_definition, globals())
-    except Exception as e:
-        verdict.value = 'RE'
-        message.value = f'Could not compile: \'{e}\''
-        return
-
-    try:
-        value = eval()
-
-
 class Invoker(InvokerServiceBase):
     def run(self, source: ast.AST, args: tuple, time_limit: int, response: dict[str, Any]):
         fn_name = None

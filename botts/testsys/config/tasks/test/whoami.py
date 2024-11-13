@@ -3,10 +3,10 @@ from typing import Any
 
 from botts.db.dao.students import Students
 from botts.testsys.components.base.task import Task, Statement
-from botts.testsys.components.check.checker import Checker, Result, Verdict
-from botts.testsys.components.check.executor import SUBSTITUTE_STDOUT
-from botts.testsys.components.check.generator import ArgList
-from botts.testsys.components.check.validator import NO_IMPORTS, NO_EXEC, NO_EVAL
+from botts.testsys.components.process.check import Checker, Result, Verdict
+from botts.testsys.components.process.execute import SUBSTITUTE_STDOUT
+from botts.testsys.components.process.generate import ArgList
+from botts.testsys.components.process.validate import NO_IMPORTS, NO_EXEC, NO_EVAL
 from botts.testsys.components.extract.jupyter import FnLocator
 
 

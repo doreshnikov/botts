@@ -5,12 +5,12 @@ from sys import setrecursionlimit
 from typing import Any
 
 from botts.testsys.components.base.task import Task
-from botts.testsys.components.check.checker import EitherOf, SequenceOf, SINGLE_BOOL, SINGLE_NUMBER, \
+from botts.testsys.components.process.check import EitherOf, SequenceOf, SINGLE_BOOL, SINGLE_NUMBER, \
     SINGLE_STRING
-from botts.testsys.components.check.generator import ArgList, Arguments, Generator, H, R_INT, R_PERM
-from botts.testsys.components.check.validator import NO_EVAL, NO_EXEC, NO_IMPORTS, NoNodeName
+from botts.testsys.components.process.generate import ArgList, Arguments, Generator, H, R_INT, R_PERM
+from botts.testsys.components.process.validate import NO_EVAL, NO_EXEC, NO_IMPORTS, NoNodeName
 from botts.testsys.components.extract.jupyter import FnLocator
-from botts.testsys.components.test.event import Event
+from botts.testsys.components.extract.contest import Contest
 
 DEFAULT_VAL = NO_IMPORTS & NO_EXEC & NO_EVAL & NoNodeName('globals')
 
@@ -121,7 +121,7 @@ def scramble(s, array):
     return ''.join(lst2)
 
 
-CONTEST02 = Event(
+CONTEST02 = Contest(
     'Contest 02',
     datetime(year=2023, month=12, day=8, hour=15, minute=26, second=0),
     [

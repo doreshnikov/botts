@@ -2,9 +2,9 @@ import textwrap
 
 from botts.testsys.components.base.include import inc
 from botts.testsys.components.base.task import Task, Statement
-from botts.testsys.components.check.checker import SequenceOf, ANYTHING
-from botts.testsys.components.check.generator import ArgList
-from botts.testsys.components.check.validator import NO_IMPORTS, NO_EXEC, NO_EVAL
+from botts.testsys.components.process.check import SequenceOf, ANYTHING
+from botts.testsys.components.process.generate import ArgList
+from botts.testsys.components.process.validate import NO_IMPORTS, NO_EXEC, NO_EVAL
 from botts.testsys.components.extract.jupyter import FnLocator
 
 from resources.tests.python.x import X

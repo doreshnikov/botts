@@ -4,10 +4,10 @@ from typing import Any
 
 from botts.testsys.components.base.include import inc
 from botts.testsys.components.base.task import Task, Statement
-from botts.testsys.components.base.units import FnCodeUnit
-from botts.testsys.components.check.checker import SequenceOf, ANYTHING, Checker, Result, Verdict
-from botts.testsys.components.check.generator import ArgList
-from botts.testsys.components.check.validator import NO_IMPORTS, NO_EXEC, NO_EVAL, Validator, REQ_RECURSION
+from botts.testsys.components.base.code import FnCodeUnit
+from botts.testsys.components.process.check import SequenceOf, ANYTHING, Checker, Result, Verdict
+from botts.testsys.components.process.generate import ArgList
+from botts.testsys.components.process.validate import NO_IMPORTS, NO_EXEC, NO_EVAL, Validator, REQUIRE_RECURSION
 from botts.testsys.components.extract.jupyter import FnLocator
 
 
@@ -67,7 +67,7 @@ TASK = Task(
     ),
     include=[],
     locator=FnLocator('guess'),
-    validator=NO_IMPORTS & NO_EXEC & NO_EVAL & REQ_RECURSION & ShouldIncludeSpecialVar(),
+    validator=NO_IMPORTS & NO_EXEC & NO_EVAL & REQUIRE_RECURSION & ShouldIncludeSpecialVar(),
     checker=BreakMeChecker(),
     tests=[
         ArgList()

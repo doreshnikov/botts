@@ -5,12 +5,12 @@ from typing import Any
 
 from botts.testsys.components.base.include import inc
 from botts.testsys.components.base.task import Task
-from botts.testsys.components.check.checker import Checker, SequenceOf, Result, SINGLE_FLOAT_6, SINGLE_STRING, \
+from botts.testsys.components.process.check import Checker, SequenceOf, Result, SINGLE_FLOAT_6, SINGLE_STRING, \
     Verdict
-from botts.testsys.components.check.generator import ArgList, Arguments, H, R_INT, R_FLOAT
-from botts.testsys.components.check.validator import NO_EVAL, NO_EXEC, NO_IMPORTS, NO_RECURSION, REQ_RECURSION
+from botts.testsys.components.process.generate import ArgList, Arguments, H, R_INT, R_FLOAT
+from botts.testsys.components.process.validate import NO_EVAL, NO_EXEC, NO_IMPORTS, NO_RECURSION, REQUIRE_RECURSION
 from botts.testsys.components.extract.jupyter import FnLocator
-from botts.testsys.components.test.event import Event
+from botts.testsys.components.extract.contest import Contest
 
 
 
@@ -38,7 +38,7 @@ def approximation(a, k, n):
     return x
 
 
-HW02 = Event(
+HW02 = Contest(
     'Homework 02',
     datetime(year=2023, month=11, day=5, hour=0, minute=0, second=0),
     [
@@ -50,7 +50,7 @@ HW02 = Event(
             include=[
                 inc('import math')
             ],
-            validator=NO_IMPORTS & NO_EXEC & NO_EVAL & REQ_RECURSION,
+            validator=NO_IMPORTS & NO_EXEC & NO_EVAL & REQUIRE_RECURSION,
             checker=SINGLE_FLOAT_6,
             tests=[
                 ArgList(1),
@@ -71,7 +71,7 @@ HW02 = Event(
             id_='3-2-hanoi',
             locator=FnLocator('solve_hanoi'),
             include=[],
-            validator=NO_IMPORTS & NO_EXEC & NO_EVAL & REQ_RECURSION,
+            validator=NO_IMPORTS & NO_EXEC & NO_EVAL & REQUIRE_RECURSION,
             checker=SequenceOf(SINGLE_STRING),
             tests=[
                 ArgList(0, 2, 4),
@@ -93,7 +93,7 @@ HW02 = Event(
                 inc('from sys import setrecursionlimit\n'
                     'setrecursionlimit(100000)')
             ],
-            validator=NO_IMPORTS & NO_EXEC & NO_EVAL & REQ_RECURSION,
+            validator=NO_IMPORTS & NO_EXEC & NO_EVAL & REQUIRE_RECURSION,
             checker=SINGLE_FLOAT_6,
             tests=[
                 ArgList(10.0, 178324.0, 10000),

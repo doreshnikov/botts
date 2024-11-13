@@ -6,6 +6,7 @@ from multiprocessing import Process, Queue
 from typing import Any
 
 from common.logging import setup_logging
+from common.testsys.runner import Verdict, TestingResult
 from invoker.common import InvokerServiceBase
 
 
@@ -19,61 +20,28 @@ class Request:
 
 class Invoker(InvokerServiceBase):
     def run(self, source: ast.AST, args: tuple, time_limit: int, response: dict[str, Any]):
-        fn_name = None
-        for node in ast.walk(source):
-            if isinstance(node, ast.FunctionDef):
-                fn_name = node.name
-                break
+        response = TestingResult(Verdict.CF)
 
-        if not isinstance(source, ast.Module):
-            source = ast.Module(body=[source])
-
-        try:
-            code = compile(source, filename='<ast>', mode='exec')
-            evaluate = ast.parse(f'{fn_name}(*args)', mode='eval')
-            expr = compile(evaluate, filename='<ast>', mode='eval')
-        except SyntaxError as e:
-            response['verdict'] = 'RE'
-            response['message'] = f'Could not compile: \'{e}\''
-
+        
         queue = Queue()
 
         # noinspection PyUnusedLocal
         def __evaluate(queue, code, expr, args):
-            try:
-                exec(code, globals())
-            except Exception as e:
-                queue.put({
-                    'verdict': 'RE',
-                    'message': f'could not run: \'{e}\''
-                })
-                return
-            try:
-                value = eval(expr, globals(), locals())
-                queue.put({
-                    'verdict': 'OK',
-                    'value': value
-                })
-            except Exception as e:
-                message = f'runtime error \'{e}\''
-                queue.put({
-                    'verdict': 'RE',
-                    'message': message
-                })
+            queue.put(evaluate(code, expr, args))
 
         process = Process(target=__evaluate, args=(queue, code, expr, args))
         process.start()
         process.join(time_limit)
+
         if process.is_alive():
             self.logger.info('Solution timed out')
             queue.close()
             process.terminate()
             self.logger.info('Process terminated')
-            response['verdict'] = 'TL'
-            response['message'] = f'took more than {time_limit}s to complete'
+            response.verdict = Verdict.TL
+            response.message = f'took more than {time_limit}s to complete'
         elif not queue.empty():
-            result = queue.get()
-            response.update(result)
+            response = queue.get()
             self.logger.info('Testing complete')
 
     def validate(self, input_data: str | bytes, response: dict[str, Any]) -> Request | None:

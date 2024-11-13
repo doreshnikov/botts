@@ -3,9 +3,9 @@ import textwrap
 
 from botts.testsys.components.base.include import inc
 from botts.testsys.components.base.task import Task, Statement
-from botts.testsys.components.check.checker import SINGLE_FLOAT_4
-from botts.testsys.components.check.generator import ArgList, H, R_FLOAT
-from botts.testsys.components.check.validator import NO_IMPORTS, NO_EXEC, NO_EVAL
+from botts.testsys.components.process.check import SINGLE_FLOAT_4
+from botts.testsys.components.process.generate import ArgList, H, R_FLOAT
+from botts.testsys.components.process.validate import NO_IMPORTS, NO_EXEC, NO_EVAL
 from botts.testsys.components.extract.jupyter import FnLocator
 
 from . import *

@@ -3,13 +3,13 @@ from datetime import datetime
 
 from botts.testsys.components.base.include import inc
 from botts.testsys.components.base.task import Task
-from botts.testsys.components.check.checker import DictOf, EitherOf, SequenceOf, SINGLE_BOOL, SINGLE_FLOAT_6, \
+from botts.testsys.components.process.check import DictOf, EitherOf, SequenceOf, SINGLE_BOOL, SINGLE_FLOAT_6, \
     SINGLE_NUMBER, \
     SINGLE_STRING
-from botts.testsys.components.check.generator import ArgList, H, R_INT, R_STRING
-from botts.testsys.components.check.validator import NO_EVAL, NO_EXEC, NO_IMPORTS, NoFnCall, NoNodeName
+from botts.testsys.components.process.generate import ArgList, H, R_INT, R_STRING
+from botts.testsys.components.process.validate import NO_EVAL, NO_EXEC, NO_IMPORTS, NoFnCall, NoNodeName
 from botts.testsys.components.extract.jupyter import FnLocator
-from botts.testsys.components.test.event import Event
+from botts.testsys.components.extract.contest import Contest
 
 DEFAULT_VAL = NO_IMPORTS & NO_EXEC & NO_EVAL & NoNodeName('globals')
 
@@ -125,7 +125,7 @@ def projection_area(grid):
     return xy + xz + yz
 
 
-MIDTERM = Event(
+MIDTERM = Contest(
     'Midterm',
     datetime(year=2023, month=11, day=10, hour=14, minute=5, second=0),
     [

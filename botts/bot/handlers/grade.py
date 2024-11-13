@@ -23,9 +23,9 @@ from botts.db.run import Run
 from botts.db.student import Student
 from botts.db.submission import Submission
 from botts.testsys.components.base.task import Task
-from botts.testsys.components.check.checker import Result, Verdict
+from botts.testsys.components.process.check import Result, Verdict
 from botts.testsys.components.extract.jupyter import NotebookContainer
-from botts.testsys.components.test.event import Event
+from botts.testsys.components.extract.contest import Contest
 
 grade_router = Router()
 
@@ -51,7 +51,7 @@ class FormatCallback(CallbackData, prefix='format'):
 def event_selector(allow_expired: bool = True):
     builder = InlineKeyboardBuilder()
     count = 0
-    for event_id, event in Event.ALL.items():
+    for event_id, event in Contest.ALL.items():
         if event.is_expired and not allow_expired:
             continue
         count += 1
@@ -94,7 +94,7 @@ async def handle_event(query: CallbackQuery, state: FSMContext):
     data = EventCallback.unpack(query.data)
     allow_expired = query.from_user.id == ADMIN_ID
     selector_message: Message = (await state.get_data())['selector_message']
-    if Event.ALL[data.option].is_expired and not allow_expired:
+    if Contest.ALL[data.option].is_expired and not allow_expired:
         await query.answer('Дедлайн по этому заданию уже прошел')
         return
 
@@ -152,7 +152,7 @@ async def _grade(
         message: Message, state: FSMContext, bot: Bot
 ):
     event_id = (await state.get_data())['event_id']
-    event = Event.ALL[event_id]
+    event = Contest.ALL[event_id]
     batch_size = max(len(event.tasks) // 10, 1)
     reply = await message.reply('Ok, тестируется...')
     chat_action = ChatActionSender.typing(bot=bot, chat_id=message.from_user.id)
@@ -198,7 +198,7 @@ async def _grade(
         message_id=reply.message_id
     )
     loop = asyncio.get_running_loop()
-    loop.create_task(Event.ALL[event_id].run(
+    loop.create_task(Contest.ALL[event_id].run(
         container, submission,
         callback, final_callback
     ))
@@ -262,7 +262,7 @@ async def handle_event_status(query: CallbackQuery, state: FSMContext, _student:
     data = EventCallback.unpack(query.data)
     selector_message: Message = (await state.get_data())['selector_message']
     event_id = data.option
-    event = Event.ALL[event_id]
+    event = Contest.ALL[event_id]
 
     submissions = (Submission
                    .select(Submission)

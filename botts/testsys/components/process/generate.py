@@ -74,7 +74,7 @@ def delay(generator: type) -> Callable:
     return initialize
 
 
-def generate(gen_object: Generator | Any, random: Random) -> Any:
+def generate(gen_object: Generator | Any, random: Random) -> Arguments:
     if isinstance(gen_object, Generator):
         return gen_object(random)
     return gen_object

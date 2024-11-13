@@ -1,30 +1,7 @@
 import ast
-import json
-from abc import ABC, abstractmethod
-from dataclasses import dataclass, field
-from typing import Iterable, Iterator
 
-from botts.testsys.components.base.units import FnCodeUnit
-
-
-class Locator(ABC):
-    @abstractmethod
-    def matches(self, node: ast.AST) -> bool:
-        pass
-
-    @abstractmethod
-    def __hash__(self):
-        pass
-
-
-@dataclass(eq=True, frozen=True)
-class FnLocator(Locator):
-    name: str
-
-    def matches(self, node: ast.AST) -> bool:
-        if not isinstance(node, ast.FunctionDef):
-            return False
-        return node.name == self.name
+from .locator import Locator, FnLocator, CollectReport
+from ..base.code import CodeUnit
 
 
 class NotebookContainer:
@@ -33,54 +10,42 @@ class NotebookContainer:
         if 'cells' not in content:
             raise ValueError('no \'cells\' field found in .json-like content')
 
-    @staticmethod
-    def _collect_cell(cell: list[str]):
-        return ''.join(cell)
+    def parse(self) -> list[str]:
+        return [
+            ''.join(cell['source'])
+            for cell in self.content['cells']
+            if isinstance(cell, dict) and cell.get('cell_type') == 'code'
+        ]
 
-    def __iter__(self) -> Iterator[str]:
-        return map(
-            lambda cell: NotebookContainer._collect_cell(cell['source']),
-            iter([
-                item
-                for item in self.content['cells']
-                if isinstance(item, dict) and item.get('cell_type') == 'code'
-            ])
-        )
-
-    @dataclass
-    class CollectReport:
-        malformed_source: dict[int, SyntaxError] = field(default_factory=dict)
-        ignored_repeats: dict[Locator, int] = field(default_factory=dict)
-        data: dict[Locator, FnCodeUnit] = field(default_factory=dict)
-
-    def collect(self, locators: list[Locator]):
-        preprocess = {
-            locator.name: locator
-            for locator in locators
-            if isinstance(locator, FnLocator)
-        }  # TODO rewrite in more generic way
-
-        report = NotebookContainer.CollectReport()
+    def collect(self, locators: list[Locator]) -> CollectReport:
+        report = CollectReport()
+        
         for i, cell in enumerate(self):
             try:
                 tree = ast.parse(cell)
             except SyntaxError as e:
                 report.malformed_source[i] = e
                 continue
+            
             for node in ast.walk(tree):
-                if not isinstance(node, ast.FunctionDef):
+                if node.__class__ not in Locator.ALLOWED_TYPES:
                     continue
-                if node.name in preprocess:
-                    loc = preprocess[node.name]
-                    if loc in report.data:
-                        report.ignored_repeats[loc] = report.ignored_repeats.get(loc, 0) + 1
-                    else:
-                        # noinspection PyTypeChecker
-                        source = ast.get_source_segment(cell, node)
-                        if source is None:
-                            source = cell
-                        # noinspection PyTypeChecker
-                        report.data[loc] = FnCodeUnit(source, node)
+                
+                for locator in locators:
+                    if not locator.matches(node):
+                        continue
+                    
+                    if locator in report.data:
+                        report.ignored_repeats[locator] = report.ignored_repeats.get(locator, 0) + 1
+                        continue
+                
+                    # noinspection PyTypeChecker
+                    source = ast.get_source_segment(cell, node)
+                    if source is None:
+                        source = cell
+                    # noinspection PyTypeChecker
+                    report.data[locator] = CodeUnit(source, node)
+
         return report
 
 

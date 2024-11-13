@@ -5,11 +5,11 @@ from typing import Any
 
 from botts.testsys.components.base.include import inc
 from botts.testsys.components.base.task import Task
-from botts.testsys.components.check.checker import BYTES, Checker, Result, SINGLE_NUMBER, Verdict
-from botts.testsys.components.check.generator import ArgList, H, R_INT
-from botts.testsys.components.check.validator import NO_EVAL, NO_EXEC, NO_IMPORTS
+from botts.testsys.components.process.check import BYTES, Checker, Result, SINGLE_NUMBER, Verdict
+from botts.testsys.components.process.generate import ArgList, H, R_INT
+from botts.testsys.components.process.validate import NO_EVAL, NO_EXEC, NO_IMPORTS
 from botts.testsys.components.extract.jupyter import FnLocator
-from botts.testsys.components.test.event import Event
+from botts.testsys.components.extract.contest import Contest
 
 
 def substitute_stdout(fn):
@@ -258,7 +258,7 @@ def compress():
 with open('resources/tests/large-json.json', 'r') as f:
     LARGE_JSON = json.load(f)
 
-HW03 = Event(
+HW03 = Contest(
     'Homework 03',
     datetime(year=2024, month=1, day=15, hour=3, minute=0, second=0),
     [
