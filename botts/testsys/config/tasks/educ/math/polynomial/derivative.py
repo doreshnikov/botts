@@ -20,9 +20,11 @@ def solution(p: polynomial) -> polynomial:
 TASK = Task(
     id_='polynomial-derivative',
     statement=Statement(
-        # TODO
         md=textwrap.dedent('''
-        <<Перенести условие из блокнота>>
+        `> DERIVATIVE`
+        
+        Напишите функцию `polynomial_derivative(a)`, вычисляющую производную многочлена.
+        Например, `polynomial_derivative([1, 2, 3])` должна вернуть `[2, 6]`.
         ''')
     ),
     locator=FnLocator('polynomial_derivative'),

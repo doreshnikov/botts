@@ -21,13 +21,26 @@ class Checker(ABC):
 
 
 class _Anything(Checker):
-    def check(self, in_data: Any, out_data: Any, answer: Any, **__) -> Result:
+    def check(self, _: Any, out_data: Any, answer: Any, **__) -> Result:
         if out_data != answer:
             return Result(Verdict.IA, f"expected '{answer}', got '{out_data}'")
         return Result(Verdict.OK, None)
 
 
+class _VerboseChecker(Checker):
+    def __init__(self, wrapped: Checker):
+        super().__init__()
+        self.checker = wrapped
+    
+    def check(self, in_data: Any, out_data: Any, answer: Any, **kwargs) -> Result:
+        result = self.checker.check(in_data, out_data, answer, **kwargs)
+        if result.verdict == Verdict.OK:
+            return result
+        return Result(result.verdict, f'Failed on {in_data}, expected {answer}, got {out_data}')
+    
+
 ANYTHING = _Anything()
+VERBOSE = _VerboseChecker
 
 
 class Exact(Checker):

@@ -11,6 +11,7 @@ from botts.testsys.components.extract.jupyter import FnLocator
 
 from . import *
 from .multiply import solution as polynomial_multiply
+from .evaluate import solution as polynomial_evaluate
 
 
 class FindRootChecker(Checker):
@@ -19,7 +20,7 @@ class FindRootChecker(Checker):
             return Result(Verdict.IA, f"expected a number, got '{out_data}'")
 
         # noinspection PyTypeChecker
-        value = polynomial_calculate(*in_data.args, out_data)
+        value = polynomial_evaluate(*in_data.args, out_data)
         if abs(value) > 0.0001:
             return Result(Verdict.WA, f"{out_data} is not a root: f(x) = {value}")
         return Result(Verdict.OK, None)
@@ -28,9 +29,15 @@ class FindRootChecker(Checker):
 TASK = Task(
     id_='polynomial-find-root',
     statement=Statement(
-        # TODO
         md=textwrap.dedent('''
-        <<Перенести условие из блокнота>>
+        `> FIND ROOT`
+        
+        Напишите функцию `polynomial_find_root(a)`, вычисляющую какой-то один корень 
+        многочлена. Известно, что корень существует и находится от -100.0 до 100.0.
+        Ваш ответ будет засчитан, если при подстановке вашего значения в многочлен получится 
+        число, не превосходящее по модулю 0.0001.
+        
+        Например, `polynomial_find_root([1, -2, 1])` должна вернуть `-1`.
         ''')
     ),
     locator=FnLocator('polynomial_find_root'),
@@ -46,8 +53,8 @@ TASK = Task(
         *H.repeat_test(
             R_INT(5, 10).map(
                 lambda size: R_FLOAT(-10.0, 10.0).repeat(size, as_type=list).map(
-                    lambda it: R_FLOAT(-100.0, 100.0).map(
-                        lambda x: ArgList(polynomial_multiply(it, [-x, 1]))
+                    lambda it: R_INT(-10 ** 5, 10 ** 5).map(
+                        lambda x: ArgList(polynomial_multiply(it, [-x / 1000, 1]))
                     )
                 )
             ),

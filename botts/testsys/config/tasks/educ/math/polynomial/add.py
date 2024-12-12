@@ -24,9 +24,11 @@ def solution(p: polynomial, q: polynomial) -> polynomial:
 TASK = Task(
     id_='polynomial-add',
     statement=Statement(
-        # TODO
         md=textwrap.dedent('''
-        <<Перенести условие из блокнота>>
+        `> ADD`
+        
+        Напишите функцию `polynomial_add(a, b)`, складывающую два многочлена.
+        Например, `polynomial_add([1, 2], [0, 2, 3])` должна вернуть `[1, 4, 3]`.
         ''')
     ),
     locator=FnLocator('polynomial_add'),

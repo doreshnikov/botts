@@ -19,6 +19,3 @@ class TestingResult:
     verdict: Verdict
     message: str | None
     value: Any = field(default=None)
-
-
-def evaluate(code, expr)

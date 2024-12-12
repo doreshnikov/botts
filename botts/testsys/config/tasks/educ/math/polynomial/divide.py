@@ -10,8 +10,8 @@ from botts.testsys.components.extract.jupyter import FnLocator
 from . import *
 
 
-def solution(p: polynomial, q: polynomial) -> polynomial:
-    quot, rem = [], []
+def solution(p: polynomial, q: polynomial) -> tuple[polynomial, polynomial]:
+    quot = []
     while len(q) > 0 and q[-1] == 0:
         q.pop()
     while len(p) > 1 and p[-1] == 0:
@@ -34,9 +34,12 @@ def solution(p: polynomial, q: polynomial) -> polynomial:
 TASK = Task(
     id_='polynomial-divide',
     statement=Statement(
-        # TODO
         md=textwrap.dedent('''
-        <<Перенести условие из блокнота>>
+        `> DIVIDE *`
+        
+        Напишите функцию `polynomial_divide(a, b)`, вычисляющую частное двух многочленов.
+        Многочлены делятся в столбик, необходимо вернуть пару из неполного частного и остатка.
+        Например, `polynomial_divide([1, 3, 1], [1, 1])` должна вернуть `[2, 1], [-1]`.
         ''')
     ),
     locator=FnLocator('polynomial_divide'),

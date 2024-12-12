@@ -3,7 +3,7 @@ from typing import Awaitable, Callable
 
 from botts.db.submission import Submission
 from .runner import Runner
-from ..base.task import Task
+from ..base.task import Task, Statement
 from ..check.checker import Result, Verdict
 from ..extract.jupyter import NotebookContainer
 
@@ -11,12 +11,13 @@ from ..extract.jupyter import NotebookContainer
 class Event:
     ALL: dict[str, 'Event'] = {}
 
-    def __init__(self, name: str, start: datetime, deadline: datetime, tasks: list[Task]):
+    def __init__(self, name: str, start: datetime, deadline: datetime, tasks: list[Task], *, statement_prefix: Statement | None = None):
         self.name = name
         self.start = start
         self.deadline = deadline
         self.tasks = tasks
         self.id_ = name.lower().replace(' ', '-')
+        self.statement_prefix = statement_prefix
         Event.ALL[self.id_] = self
 
     @property
@@ -31,8 +32,11 @@ class Event:
         return task_options[0]
 
     def render_statement(self) -> str:
-        separator = '\n'
-        return separator.join(map(lambda task: task.statement.md, self.tasks))
+        separator = ''
+        items = list(map(lambda task: task.statement.md, self.tasks))
+        if self.statement_prefix is not None:
+            items = [self.statement_prefix.md] + items
+        return separator.join(items)
 
     async def run(
             self, container: NotebookContainer, submission: Submission,
