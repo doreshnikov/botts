@@ -15,7 +15,7 @@ from botts.testsys.config.tasks.educ.math.polynomial.divide import TASK as _divi
 EVENT = Event(
     '02-polynomials',
     datetime(year=2024, month=10, day=22, hour=0, minute=0, second=0),
-    datetime(year=2025, month=1, day=17, hour=21, minute=0, second=0),
+    datetime(year=2025, month=1, day=16, hour=21, minute=0, second=0),
     [_evaluate, _add, _derivative, _multiply, _find_root, _to_string, _divide],
     statement_prefix=Statement(
         md=textwrap.dedent('''

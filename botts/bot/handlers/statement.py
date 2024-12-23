@@ -27,7 +27,7 @@ class StatementState(StatesGroup):
 @flags.authorized(True)
 async def handle_grade(message: Message, state: FSMContext):
     await state.set_state(StatementState.EVENT_SELECT)
-    reply_markup = event_selector(allow_expired=True)
+    reply_markup = event_selector(allow_expired=message.from_user.id == ADMIN_ID)
     text = (
         'Выберите контест'
         if reply_markup is not None
@@ -48,5 +48,6 @@ async def handle_event(query: CallbackQuery, state: FSMContext):
     await selector_message.edit_text(
         event.render_statement(),
         reply_markup=None,
-        parse_mode='Markdown'
+        parse_mode='Markdown',
+        disable_web_page_preview=True
     )

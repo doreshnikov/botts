@@ -11,6 +11,6 @@ from botts.testsys.config.tasks.educ.phys.travel_distance import TASK as _travel
 EVENT = Event(
     '01-maths',
     datetime(year=2024, month=10, day=22, hour=0, minute=0, second=0),
-    datetime(year=2024, month=12, day=19, hour=21, minute=0, second=0),
+    datetime(year=2024, month=12, day=26, hour=21, minute=0, second=0),
     [_normal_cdf, _angle, _triangle_area, _highest_point, _travel_distance]
 )
