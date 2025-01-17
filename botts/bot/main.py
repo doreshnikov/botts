@@ -11,7 +11,9 @@ from .handlers.grade import grade_router
 from .handlers.infra.register import router as register_router
 from .handlers.infra.start import router as start_router
 from .handlers.master import master_router
+from .handlers.cheating import cheating_router
 from .handlers.statement import statement_router
+
 from .middlewares.formatting import FormattingMiddleware
 
 from .middlewares.testing_wall import TestingWall
@@ -24,7 +26,10 @@ dispatcher.include_routers(
     grade_router,
     statement_router
 )
-dispatcher.include_router(master_router)
+dispatcher.include_routers(
+    master_router,
+    cheating_router
+)
 
 dispatcher.update.outer_middleware(LoggingMiddleware(field_rules=DEFAULT_FIELD_RULES))
 dispatcher.update.outer_middleware(StudentDataMiddleware())

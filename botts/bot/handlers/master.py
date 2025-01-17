@@ -14,7 +14,8 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 from botts.bot.util.text import escape_md
 from botts.db.dao.master import Master
-from botts.db.run import Run
+from botts.db.run import Run, Submission
+from botts.db.student import Student
 from botts.db.util.filter import DBFilter
 from botts.testsys.components.check.checker import Result, Verdict
 from botts.testsys.components.test.event import Event
@@ -117,11 +118,17 @@ async def handle_run(query: CallbackQuery, bot: Bot):
     data = RunCallback.unpack(query.data)
     await query.answer('Fetching run...')
     run = Run.get_by_id(data.run_id)
+    
+    submission = Submission.get_by_id(run.submission_id)
+    student = Student.get_by_id(submission.student_id)
+    
     await bot.send_message(
         query.from_user.id,
         f'*Run {run.id_}*\n'
         f'Task: _{escape_md(run.task_id)}_\n'
         f'Verdict: `{run.verdict}`\n'
+        f'Student: {student.name}\n'
+        f'Time: {escape_md(str(submission.timestamp))}\n'
         f'Comment: `{escape_md(str(run.comment))}`\n\n'
         f'```python\n'
         f'{run.solution_source}\n'
